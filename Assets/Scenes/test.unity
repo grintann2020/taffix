@@ -168,28 +168,47 @@ MonoBehaviour:
   hexMeshs:
   - {fileID: -2010818610661882947, guid: 95d417f11f99869438c6ce1694170d2a, type: 3}
   hexMaterials:
+  - {fileID: 2100000, guid: f258cd456ac507b41b2518ae6f0c728e, type: 2}
+  - {fileID: 2100000, guid: 883bb44ffebc2214db3c7fc13077481d, type: 2}
+  - {fileID: 2100000, guid: 4783467b8d51ae34db549efa00fb31d0, type: 2}
   - {fileID: 2100000, guid: da8a5ca663714ae49930ea7d3a1debbc, type: 2}
   - {fileID: 2100000, guid: 3c5a4100c4ac61549b29262fd06cecaa, type: 2}
   - {fileID: 2100000, guid: 38ac600274b6af14fa8818eb3f5b4fcc, type: 2}
   - {fileID: 2100000, guid: 1d2385be0acfb7e469042e0cbefc4c7b, type: 2}
+  - {fileID: 2100000, guid: 02b37196e7a8aae49a5db6011a54bdfe, type: 2}
   hexSide1Meshs:
   - {fileID: -8941423254518358176, guid: da5fd92c6c9eaf14fb087026a1379803, type: 3}
   hexSide1Materials:
+  - {fileID: 2100000, guid: f258cd456ac507b41b2518ae6f0c728e, type: 2}
   - {fileID: 2100000, guid: 883bb44ffebc2214db3c7fc13077481d, type: 2}
   - {fileID: 2100000, guid: 4783467b8d51ae34db549efa00fb31d0, type: 2}
   - {fileID: 2100000, guid: da8a5ca663714ae49930ea7d3a1debbc, type: 2}
+  - {fileID: 2100000, guid: 3c5a4100c4ac61549b29262fd06cecaa, type: 2}
+  - {fileID: 2100000, guid: 38ac600274b6af14fa8818eb3f5b4fcc, type: 2}
+  - {fileID: 2100000, guid: 1d2385be0acfb7e469042e0cbefc4c7b, type: 2}
+  - {fileID: 2100000, guid: 02b37196e7a8aae49a5db6011a54bdfe, type: 2}
   hexSide2Meshs:
   - {fileID: -3045330078198335894, guid: 6883a6216c72c6948976baee6d7d4e4d, type: 3}
   hexSide2Materials:
   - {fileID: 2100000, guid: 883bb44ffebc2214db3c7fc13077481d, type: 2}
-  - {fileID: 2100000, guid: 4783467b8d51ae34db549efa00fb31d0, type: 2}
-  - {fileID: 2100000, guid: da8a5ca663714ae49930ea7d3a1debbc, type: 2}
-  hexSide3Meshs:
-  - {fileID: -5417565176425399966, guid: c40ab9855c962904791e5e033aded4fb, type: 3}
-  hexSide3Materials:
   - {fileID: 2100000, guid: 883bb44ffebc2214db3c7fc13077481d, type: 2}
   - {fileID: 2100000, guid: 4783467b8d51ae34db549efa00fb31d0, type: 2}
   - {fileID: 2100000, guid: da8a5ca663714ae49930ea7d3a1debbc, type: 2}
+  - {fileID: 2100000, guid: 3c5a4100c4ac61549b29262fd06cecaa, type: 2}
+  - {fileID: 2100000, guid: 38ac600274b6af14fa8818eb3f5b4fcc, type: 2}
+  - {fileID: 2100000, guid: 1d2385be0acfb7e469042e0cbefc4c7b, type: 2}
+  - {fileID: 2100000, guid: 02b37196e7a8aae49a5db6011a54bdfe, type: 2}
+  hexSide3Meshs:
+  - {fileID: -5417565176425399966, guid: c40ab9855c962904791e5e033aded4fb, type: 3}
+  hexSide3Materials:
+  - {fileID: 2100000, guid: f258cd456ac507b41b2518ae6f0c728e, type: 2}
+  - {fileID: 2100000, guid: 883bb44ffebc2214db3c7fc13077481d, type: 2}
+  - {fileID: 2100000, guid: 4783467b8d51ae34db549efa00fb31d0, type: 2}
+  - {fileID: 2100000, guid: da8a5ca663714ae49930ea7d3a1debbc, type: 2}
+  - {fileID: 2100000, guid: 3c5a4100c4ac61549b29262fd06cecaa, type: 2}
+  - {fileID: 2100000, guid: 38ac600274b6af14fa8818eb3f5b4fcc, type: 2}
+  - {fileID: 2100000, guid: 1d2385be0acfb7e469042e0cbefc4c7b, type: 2}
+  - {fileID: 2100000, guid: 02b37196e7a8aae49a5db6011a54bdfe, type: 2}
 --- !u!1 &406435970
 GameObject:
   m_ObjectHideFlags: 0

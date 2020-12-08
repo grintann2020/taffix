@@ -6,7 +6,7 @@ using Unity.Rendering;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace CCCC
+namespace THEX
 {
     public class ECS
     {

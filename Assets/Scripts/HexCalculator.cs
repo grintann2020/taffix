@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-namespace CCCC
+﻿namespace THEX
 {
     public class HexCalculator
     {
@@ -10,11 +9,12 @@ namespace CCCC
         //     {new int[]{+1,  0}, new int[]{+1, -1}, new int[]{ 0, -1}, new int[]{-1,  0}, new int[]{ 0, +1}, new int[]{+1, +1}}
         // };
 
-        private int[,][] hexDirections = {
+        private int[,][] directions = {
             {new int[]{+1,  0}, new int[]{ 0, +1}, new int[]{-1, +1}, new int[]{-1,  0}, new int[]{-1, -1}, new int[]{ 0, -1}},
             {new int[]{+1,  0}, new int[]{+1, +1}, new int[]{ 0, +1}, new int[]{-1,  0}, new int[]{ 0, -1}, new int[]{+1, -1}}
         };
-        // private int[,,] hexDirections = {
+
+        // private int[,,] directions = {
         //     {{+1,  0}, { 0, +1}, {-1, +1}, {-1,  0}, {-1, -1}, { 0, -1}},
         //     {{+1,  0}, {+1, +1}, { 0, +1}, {-1,  0}, { 0, -1}, {+1, -1}}
         // };
@@ -22,7 +22,7 @@ namespace CCCC
         public int[] Adjacency(int row, int direction) 
         {
             int parity = row & 1;
-            return this.hexDirections[parity, direction];
+            return this.directions[parity, direction];
         }
 
         // public Hex Adjacency(Hex[,] hexs, Hex hex, int hexDirection)

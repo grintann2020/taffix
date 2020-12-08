@@ -1,4 +1,4 @@
-﻿namespace CCCC
+﻿namespace THEX
 {
     public enum Archetype
     {
