@@ -47,18 +47,18 @@ namespace THEX
 
             (float colSpacing, float rowSpacing) = this.hexCalculator.DistributionDistance((float)unitSize);
             Coord startingPosition = this.hexCalculator.CenterPosition(colsLength, rowsLength, colSpacing, rowSpacing);
-            for (int row = 0; row < rowsLength; row++)
+            for (int col = 0; col < colsLength; col++)
             {
-                for (int col = 0; col < colsLength; col++)
+                for (int row = 0; row < rowsLength; row++)
                 {
-                    if (hexData[row, col] == -1)
+                    if (hexData[col, row] == -1)
                     {
-                        this.hexs[row, col] = null;
+                        this.hexs[col, row] = null;
                     }
                     else
                     {
                         float x = startingPosition.x + col * colSpacing;
-                        float y = startingPosition.y + (float)hexData[row, col];
+                        float y = startingPosition.y + (float)hexData[col, row];
                         float z = startingPosition.z - row * rowSpacing;
 
                         // x += this.hexCalculator.UnitWidth((float)unitSize) * (row & 1);
@@ -66,18 +66,17 @@ namespace THEX
                         {
                             x += this.hexCalculator.UnitWidth((float)unitSize);
                         }
-                        this.hexs[row, col] = new Hex(new Grid(row, col), new Coord(x, y, z));
+                        this.hexs[col, row] = new Hex(new Grid(col, row), new Coord(x, y, z));
                     }
                 }
             }
 
-            for (int row = 0; row < rowsLength; row++)
-            // for (int row = rowsLength - 1; row >= 0; row--)
+            for (int col = 0; col < colsLength; col++)
             {
-                for (int col = 0; col < colsLength; col++)
+                for (int row = 0; row < rowsLength; row++)
                 {
                     Debug.Log("row -> " + row);
-                    if (this.hexs[row, col] == null)
+                    if (this.hexs[col, row] == null)
                     {
                         continue;
                     }
@@ -87,7 +86,7 @@ namespace THEX
                     if (col < colsLength - 1)
                     {
                         direct = this.hexCalculator.Adjacency(row, (int)HexDirection.East);
-                        this.hexs[row, col].East = this.hexs[row + direct[0], col + direct[1]];
+                        this.hexs[col, row].East = this.hexs[col + direct[0], row + direct[1]];
                     }
 
                     if (row > 0 && col < colsLength - 1)
@@ -96,10 +95,11 @@ namespace THEX
                         direct = this.hexCalculator.Adjacency(row, (int)HexDirection.NorthEast);
                         Debug.Log(
                             " direct = " + (int)HexDirection.NorthEast + " --- " +
-                            " row(" + row + " + " + direct[0] + ") = " + (row + direct[0]) + " | " +
-                            " col(" + col + " + " + direct[1] + ") = " + (col + direct[1])
+                            " col(" + col + " + " + direct[1] + ") = " + (col + direct[1]) + " | " +
+                            " row(" + row + " + " + direct[0] + ") = " + (row + direct[0])
+                            
                         );
-                        this.hexs[row, col].NorthEast = this.hexs[row + direct[0], col + direct[1]];
+                        this.hexs[col, row].NorthEast = this.hexs[col + direct[0], row + direct[1]];
                     }
 
                     if (row > 0 && col > 0)
