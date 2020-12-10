@@ -7,12 +7,12 @@ FBXHeaderExtension:  {
 	CreationTimeStamp:  {
 		Version: 1000
 		Year: 2020
-		Month: 11
-		Day: 27
-		Hour: 14
-		Minute: 1
-		Second: 26
-		Millisecond: 166
+		Month: 12
+		Day: 11
+		Hour: 1
+		Minute: 44
+		Second: 54
+		Millisecond: 775
 	}
 	Creator: "FBX SDK/FBX Plugins version 2019.0"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -28,21 +28,21 @@ FBXHeaderExtension:  {
 			Comment: ""
 		}
 		Properties70:  {
-			P: "DocumentUrl", "KString", "Url", "", "E:\cccc\Assets\FBXs\Hex3Side3.FBX"
-			P: "SrcDocumentUrl", "KString", "Url", "", "E:\cccc\Assets\FBXs\Hex3Side3.FBX"
+			P: "DocumentUrl", "KString", "Url", "", "E:\thex\Assets\FBXs\Hex3Side3.FBX"
+			P: "SrcDocumentUrl", "KString", "Url", "", "E:\thex\Assets\FBXs\Hex3Side3.FBX"
 			P: "Original", "Compound", "", ""
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "3ds Max"
 			P: "Original|ApplicationVersion", "KString", "", "", "2019"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "27/11/2020 06:01:26.165"
-			P: "Original|FileName", "KString", "", "", "E:\cccc\Assets\FBXs\Hex3Side3.FBX"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "10/12/2020 17:44:54.775"
+			P: "Original|FileName", "KString", "", "", "E:\thex\Assets\FBXs\Hex3Side3.FBX"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "3ds Max"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2019"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "27/11/2020 06:01:26.165"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "10/12/2020 17:44:54.775"
 			P: "Original|ApplicationActiveProject", "KString", "", "", "C:\Users\tann\Documents\3dsMax"
-			P: "Original|ApplicationNativeFile", "KString", "", "", "E:\cccc_design\cccc.max"
+			P: "Original|ApplicationNativeFile", "KString", "", "", "E:\thex_design\thex.max"
 		}
 	}
 }
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2640396944912, "", "Scene" {
+	Document: 2195735101888, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -198,18 +198,18 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 2641360394304, "Geometry::", "Mesh" {
+	Geometry: 2196141705792, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.627450980392157,0.627450980392157,0.627450980392157
 		}
 		Vertices: *12 {
-			a: 2.5980761051178,-3,-1.5,2.5980761051178,-3,1.50000023841858,2.5980761051178,0,-1.49999988079071,2.5980761051178,0,1.50000011920929
+			a: -2.59800052642822,-2.26685847337649e-06,1.49999892711639,-2.59800004959106,-2.87980697066814e-07,-1.50000023841858,-2.59799957275391,-3.00000095367432,1.49999678134918,-2.59799909591675,-2.99999904632568,-1.50000214576721
 		} 
 		PolygonVertexIndex: *4 {
-			a: 1,0,2,-4
+			a: 1,3,2,-1
 		} 
 		Edges: *4 {
-			a: 0,1,3,2
+			a: 3,2,0,1
 		} 
 		GeometryVersion: 124
 		LayerElementNormal: 0 {
@@ -218,7 +218,7 @@ Objects:  {
 			MappingInformationType: "ByPolygonVertex"
 			ReferenceInformationType: "Direct"
 			Normals: *12 {
-				a: 1,0,0,1,0,0,1,0,0,1,0,0
+				a: -1,-3.17891419854277e-07,-1.58945951511669e-07,-1,-3.17891391432568e-07,-1.58945951511669e-07,-1,-3.17891391432568e-07,-1.58945951511669e-07,-1,-3.17891419854277e-07,-1.58945951511669e-07
 			} 
 			NormalsW: *4 {
 				a: 0,0,0,0
@@ -233,7 +233,7 @@ Objects:  {
 				a: 0.75,0,0.583333313465118,0,0.75,1,0.583333313465118,1
 			} 
 			UVIndex: *4 {
-				a: 1,0,2,3
+				a: 1,3,2,0
 			} 
 		}
 		Layer: 0 {
@@ -248,7 +248,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2641365134976, "Model::Hex3Side3", "Mesh" {
+	Model: 2196145133904, "Model::Hex3Side3", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "PreRotation", "Vector3D", "Vector", "",-90,-0,0
@@ -257,7 +257,7 @@ Objects:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
 			P: "Lcl Rotation", "Lcl Rotation", "", "A",90.0000025044781,-0,0
-			P: "MaxHandle", "int", "Integer", "UH",181
+			P: "MaxHandle", "int", "Integer", "UH",184
 		}
 		Shading: T
 		Culling: "CullingOff"
@@ -270,8 +270,8 @@ Objects:  {
 Connections:  {
 	
 	;Model::Hex3Side3, Model::RootNode
-	C: "OO",2641365134976,0
+	C: "OO",2196145133904,0
 	
 	;Geometry::, Model::Hex3Side3
-	C: "OO",2641360394304,2641365134976
+	C: "OO",2196141705792,2196145133904
 }

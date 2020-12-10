@@ -179,7 +179,7 @@ namespace THEX
                         this.eCS.EntityManager.SetComponentData(hexSideArray[indexOfSide], new Rotation
                         {
                             // quaternion rot = new Qquaternion.RotateY(0),
-                            Value = quaternion.RotateY(adj * 1.0472f)
+                            Value = quaternion.RotateY((adj + 0) * 1.0472f)
                         });
                     }
                 }
