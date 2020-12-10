@@ -36,7 +36,8 @@ namespace THEX
             eCS.Create(EntityCategory.Hex3Side3, Archetype.Rotation, hexSide3Meshs, hexSide3Materials);
             space.Init();
             space.Bind(eCS, hexCalculator);
-            int[,] hArr = new int[10, 14] {
+            int[,] hArr = new int[11, 14] {
+                {1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 3, 3, 3},
                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0},
                 {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},

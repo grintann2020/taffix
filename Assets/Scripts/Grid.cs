@@ -2,13 +2,13 @@
 {
     public struct Grid
     {
-        public int col;
         public int row;
+        public int col;
         
-        public Grid (int col, int row)
+        public Grid (int row, int col)
         {
-            this.col = col;
             this.row = row;
+            this.col = col;
         }
     }
 }

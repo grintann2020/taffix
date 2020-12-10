@@ -16,11 +16,6 @@ namespace THEX
         public Hex[,] hexs = null;
         public List<HexSide> hexSideList = new List<HexSide>();
 
-        // private int[,,] hexDirections = {
-        //     {{+1,  0}, { 0, +1}, {-1, +1}, {-1,  0}, {-1, -1}, { 0, -1}},
-        //     {{+1,  0}, {+1, +1}, { 0, +1}, {-1,  0}, { 0, -1}, {+1, -1}}
-        // };
-
         public void Init()
         {
 
@@ -47,132 +42,75 @@ namespace THEX
 
             (float colSpacing, float rowSpacing) = this.hexCalculator.DistributionDistance((float)unitSize);
             Coord startingPosition = this.hexCalculator.CenterPosition(colsLength, rowsLength, colSpacing, rowSpacing);
-            for (int col = 0; col < colsLength; col++)
+            for (int row = 0; row < rowsLength; row++)
             {
-                for (int row = 0; row < rowsLength; row++)
+                for (int col = 0; col < colsLength; col++)
                 {
-                    if (hexData[col, row] == -1)
+                    if (hexData[row, col] == -1)
                     {
-                        this.hexs[col, row] = null;
+                        this.hexs[row, col] = null;
                     }
                     else
                     {
                         float x = startingPosition.x + col * colSpacing;
-                        float y = startingPosition.y + (float)hexData[col, row];
-                        float z = startingPosition.z - row * rowSpacing;
+                        float y = startingPosition.y + (float)hexData[row, col];
+                        float z = startingPosition.z + row * rowSpacing;
 
                         // x += this.hexCalculator.UnitWidth((float)unitSize) * (row & 1);
                         if (row % 2 != 0)
                         {
                             x += this.hexCalculator.UnitWidth((float)unitSize);
                         }
-                        this.hexs[col, row] = new Hex(new Grid(col, row), new Coord(x, y, z));
+                        this.hexs[row, col] = new Hex(new Grid(row, col), new Coord(x, y, z));
                     }
                 }
             }
 
-            for (int col = 0; col < colsLength; col++)
+            for (int row = 0; row < rowsLength; row++)
             {
-                for (int row = 0; row < rowsLength; row++)
+                for (int col = 0; col < colsLength; col++)
                 {
-                    Debug.Log("row -> " + row);
-                    if (this.hexs[col, row] == null)
+                    if (this.hexs[row, col] == null)
                     {
                         continue;
                     }
 
-                    int[] direct = new int[2];
-
                     if (col < colsLength - 1)
                     {
-                        direct = this.hexCalculator.Adjacency(row, (int)HexDirection.East);
-                        this.hexs[col, row].East = this.hexs[col + direct[0], row + direct[1]];
-                    }
-
-                    if (row > 0 && col < colsLength - 1)
-                    {
-
-                        direct = this.hexCalculator.Adjacency(row, (int)HexDirection.NorthEast);
-                        Debug.Log(
-                            " direct = " + (int)HexDirection.NorthEast + " --- " +
-                            " col(" + col + " + " + direct[1] + ") = " + (col + direct[1]) + " | " +
-                            " row(" + row + " + " + direct[0] + ") = " + (row + direct[0])
-                            
-                        );
-                        this.hexs[col, row].NorthEast = this.hexs[col + direct[0], row + direct[1]];
-                    }
-
-                    if (row > 0 && col > 0)
-                    {
-                        direct = this.hexCalculator.Adjacency(row, (int)HexDirection.NorthWest);
-                        Debug.Log(
-                            " direct = " + (int)HexDirection.NorthWest + " --- " +
-                            " row(" + row + " + " + direct[0] + ") = " + (row + direct[0]) + " | " +
-                            " col(" + col + " + " + direct[1] + ") = " + (col + direct[1])
-                        );
-                        this.hexs[row, col].NorthWest = this.hexs[row + direct[0], col + direct[1]];
-                    }
-
-                    if (col > 0)
-                    {
-                        direct = this.hexCalculator.Adjacency(row, (int)HexDirection.West);
-                        this.hexs[row, col].West = this.hexs[row + direct[0], col + direct[1]];
-                    }
-
-                    if (row < rowsLength - 1 && col > 0)
-                    {
-                        direct = this.hexCalculator.Adjacency(row, (int)HexDirection.SouthWest);
-                        this.hexs[row, col].SouthWest = this.hexs[row + direct[0], col + direct[1]];
+                        this.hexs[row, col].East = this.hexs[row, col + 1];
                     }
 
                     if (row < rowsLength - 1 && col < colsLength - 1)
                     {
-                        direct = this.hexCalculator.Adjacency(row, (int)HexDirection.SouthEast);
-                        Debug.Log(
-                            " direct = " + (int)HexDirection.SouthEast + " --- " +
-                            " row(" + row + " + " + direct[0] + ") = " + (row + direct[0]) + " | " +
-                            " col(" + col + " + " + direct[1] + ") = " + (col + direct[1])
-                        );
-                        this.hexs[row, col].SouthEast = this.hexs[row + direct[0], col + direct[1]];
+                        this.hexs[row, col].NorthEast = this.hexs[row + 1, col + row & 1];
                     }
 
-                    // if (row < rowsLength - 1)
-                    // {
-                    //     direct = this.hexCalculator.Adjacency(row, (int)HexDirection.East);
-                    //     this.hexs[row, col].East = this.hexs[row + direct[0], col + direct[1]];
-                    // }
-                    // if (row < rowsLength - 1 && col < colsLength - 1)
-                    // {
-                    //     direct = this.hexCalculator.Adjacency(row, (int)HexDirection.NorthEast);
-                    //     this.hexs[row, col].NorthEast = this.hexs[row + direct[0], col + direct[1]];
-                    // }
-                    // if (row > 0 && col < colsLength - 1)
-                    // {
-                    //     direct = this.hexCalculator.Adjacency(row, (int)HexDirection.NorthWest);
-                    //     this.hexs[row, col].NorthWest = this.hexs[row + direct[0], col + direct[1]];
-                    // }
-                    // if (row > 0)
-                    // {
-                    //     direct = this.hexCalculator.Adjacency(row, (int)HexDirection.West);
-                    //     this.hexs[row, col].West = this.hexs[row + direct[0], col + direct[1]];
-                    // }
-                    // if (row > 0 && col > 0)
-                    // {
-                    //     direct = this.hexCalculator.Adjacency(row, (int)HexDirection.SouthWest);
-                    //     this.hexs[row, col].SouthWest = this.hexs[row + direct[0], col + direct[1]];
-                    // }
-                    // if (row < rowsLength - 1 && col > 0)
-                    // {
-                    //     direct = this.hexCalculator.Adjacency(row, (int)HexDirection.SouthEast);
-                    //     this.hexs[row, col].SouthEast = this.hexs[row + direct[0], col + direct[1]];
-                    // }
+                    if (row < rowsLength - 1 && col > 0)
+                    {
+                        this.hexs[row, col].NorthWest = this.hexs[row + 1, col - row & 1];
+                    }
 
+                    if (col > 0)
+                    {
+                        this.hexs[row, col].West = this.hexs[row, col - 1];
+                    }
 
+                    if (row > 0 && col > 0)
+                    {
+                        this.hexs[row, col].SouthWest = this.hexs[row - 1, col - row & 1];
+                    }
 
-                    // for (int dir = 0; dir < 6; dir++)
-                    // {
-                    //     this.hexs[row, col].Adjacencies[dir] = this.hexCalculator.Adjacency(this.hexs, this.hexs[row, col], dir);
-                    // }
+                    if (row > 0 && col < colsLength - 1)
+                    {
+                        // direct = this.hexCalculator.Adjacency(row, (int)HexDirection.SouthEast);
+                        // Debug.Log(
+                        //     " direct = " + (int)HexDirection.SouthEast + " --- " +
+                        //     " row(" + row + " + " + direct[0] + ") = " + (row + direct[0]) + " | " +
+                        //     " col(" + col + " + " + direct[1] + ") = " + (col + direct[1])
+                        // );
+                        // this.hexs[row, col].SouthEast = this.hexs[row + direct[0], col + direct[1]];
+                        this.hexs[row, col].SouthEast = this.hexs[row - 1, col + row & 1];
+                    }
                 }
             }
         }
@@ -203,23 +141,11 @@ namespace THEX
                             this.hexs[row, col].Z
                         )
                     });
-                    // if (row < this.hexs.GetLength(0) - 1)
-                    // {
-                    //     Debug.Log(row + ", " + col + "--" + this.hexs[row, col].Adjacencies[0]);
-                    //     if (this.hexs[row, col].Y == 0 || this.hexs[row, col].Y < this.hexs[row, col].Adjacencies[0].Y)
-                    //     {
-                    //         continue;
-                    //     }
-                    // }
+
                     if (this.hexs[row, col].Y == 0)
                     {
                         continue;
                     }
-
-                    // if (this.hexs[row, col].Adjacencies[0] != null && this.hexs[row, col].Y < this.hexs[row, col].Adjacencies[0].Y)
-                    // {
-                    //     continue;
-                    // }
 
                     for (int adj = 0; adj < 6; adj++)
                     {
@@ -228,6 +154,10 @@ namespace THEX
                         {
                             continue;
                         }
+                        // if (this.hexs[row, col].Y <= this.hexs[row, col].Adjacencies[adj].Y)
+                        // {
+                        //     continue;
+                        // }
                         int indexOfSide = row * this.hexs.GetLength(0) + col * 6 + adj;
                         //----------
                         EntityCategory hexSide = (EntityCategory)this.hexs[row, col].Y;
@@ -248,6 +178,7 @@ namespace THEX
                         });
                         this.eCS.EntityManager.SetComponentData(hexSideArray[indexOfSide], new Rotation
                         {
+                            // quaternion rot = new Qquaternion.RotateY(0),
                             Value = quaternion.RotateY(adj * 1.0472f)
                         });
                     }

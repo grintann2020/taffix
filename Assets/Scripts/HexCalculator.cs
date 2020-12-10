@@ -19,7 +19,7 @@
         //     {{+1,  0}, {+1, +1}, { 0, +1}, {-1,  0}, { 0, -1}, {+1, -1}}
         // };
 
-        public int[] Adjacency(int row, int direction) 
+        public int[] Adjacency(int row, int direction)
         {
             int parity = row & 1;
             return this.directions[parity, direction];
@@ -41,7 +41,7 @@
         //     );
         //     return hexs[hex.Row + direct[0], hex.Col + direct[1]];
         // }
-        
+
         public (float horizontalDistance, float verticalDistance) DistributionDistance(float size)
         {
             return (HorizontalDistance(size), VerticalDistance(size));
