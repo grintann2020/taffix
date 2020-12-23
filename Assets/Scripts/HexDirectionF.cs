@@ -1,12 +1,12 @@
 namespace THEX
 {
-    public enum HexDirection
+    public enum HexDirectionF
     {
-        East,
         NorthEast,
+        North,
         NorthWest,
-        West,
         SouthWest,
-        SouthEast
+        South,
+        SouthEast,
     }
 }

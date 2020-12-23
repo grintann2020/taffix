@@ -4,6 +4,7 @@ using Unity.Entities;
 using Unity.Transforms;
 using Unity.Rendering;
 using Unity.Mathematics;
+using Unity.Physics;
 using UnityEngine;
 
 namespace THEX
@@ -43,7 +44,8 @@ namespace THEX
                             typeof(Translation),
                             typeof(RenderMesh),
                             typeof(RenderBounds),
-                            typeof(LocalToWorld)
+                            typeof(LocalToWorld),
+                            typeof(PhysicsCollider)
                         );
                 case Archetype.Rotation:
                     return
@@ -54,13 +56,22 @@ namespace THEX
                             typeof(RenderBounds),
                             typeof(LocalToWorld)
                         );
+                case Archetype.Collider:
+                    return
+                        this._entityManager.CreateArchetype(
+                            typeof(Translation),
+                            typeof(RenderMesh),
+                            typeof(RenderBounds),
+                            typeof(LocalToWorld),
+                            typeof(PhysicsCollider)
+                        );
                 default:
                     return
                         this._entityManager.CreateArchetype();
             }
         }
 
-        public void Create(EntityCategory entityCategory, Archetype archetype, Mesh[] meshs, Material[] materials)
+        public void Create(EntityCategory entityCategory, Archetype archetype, Mesh[] meshs, UnityEngine.Material[] materials)
         {
             List<Entity> newEntityList = new List<Entity>();
             if (this._entityDictionary.ContainsKey(entityCategory))

@@ -13,6 +13,8 @@ namespace THEX
         public Material[] hexSide2Materials = null;
         public Mesh[] hexSide3Meshs = null;
         public Material[] hexSide3Materials = null;
+
+        private Control control = new Control();
         private Space space = new Space();
         private ECS eCS = new ECS();
         private HexCalculator hexCalculator = new HexCalculator();
@@ -36,26 +38,37 @@ namespace THEX
             eCS.Create(EntityCategory.Hex3Side3, Archetype.Rotation, hexSide3Meshs, hexSide3Materials);
             space.Init();
             space.Bind(eCS, hexCalculator);
-            int[,] hArr = new int[11, 13] {
-                {2, 0, 2, 0, 2, 0, 3, 0, 1, 0, 2, 0, 3},
+            int[,] hArr1 = new int[11, 13] {
+                {3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0},
-                {3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+                {3, 0, 1, 0, 3, 1, 0, 0, 3, 0, 0, 0, 3},
+                {0, 0, 0, 0, 0, 2, 0, 1, 2, 1, 0, 1, 0},
                 {3, 0, 1, 2, 3, 1, 3, 2, 3, 0, 0, 0, 3},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {3, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 3},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 1, 0, 2, 0, 3, 0, 1, 0, 0, 0, 3},
+                {0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0},
+                {0, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+                {0, 1, 3, 1, 0, 0, 0, 2, 3, 2, 0, 1, 3},
+                {0, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
             };
-            space.Construct(hArr, size);
+
+            //  int[,] hArr2 = new int[6, 5] {
+            int[,] hArr2 = new int[5, 5] {
+                // {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 2, 0, 0},
+                {0, 1, 3, 1, 0},
+                {0, 1, 2, 0, 0},
+                {0, 0, 0, 0, 0},
+            };
+
+            space.Construct(hArr1, size);
             Excute();
         }
 
         public void Excute()
         {
-            space.Realize();
+            space.Instantiate();
         }
     }
 }

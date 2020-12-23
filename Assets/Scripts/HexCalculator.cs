@@ -4,20 +4,10 @@
     {
         private const float ASPECT_RATIO = 1.732050807568877f;
 
-        // private int[,][] directions = {
-        //     {new int[]{+1,  0}, new int[]{ 0, -1}, new int[]{-1, -1}, new int[]{-1,  0}, new int[]{-1, +1}, new int[]{ 0, +1}},
-        //     {new int[]{+1,  0}, new int[]{+1, -1}, new int[]{ 0, -1}, new int[]{-1,  0}, new int[]{ 0, +1}, new int[]{+1, +1}}
-        // };
-
         private int[,][] directions = {
-            {new int[]{+1,  0}, new int[]{ 0, +1}, new int[]{-1, +1}, new int[]{-1,  0}, new int[]{-1, -1}, new int[]{ 0, -1}},
-            {new int[]{+1,  0}, new int[]{+1, +1}, new int[]{ 0, +1}, new int[]{-1,  0}, new int[]{ 0, -1}, new int[]{+1, -1}}
+            {new int[]{0, +1}, new int[]{-1,  0}, new int[]{-1, -1}, new int[]{0, -1}, new int[]{+1, -1}, new int[]{+1,  0}},
+            {new int[]{0, +1}, new int[]{-1, +1}, new int[]{-1,  0}, new int[]{0, -1}, new int[]{+1,  0}, new int[]{+1, +1}}
         };
-
-        // private int[,,] directions = {
-        //     {{+1,  0}, { 0, +1}, {-1, +1}, {-1,  0}, {-1, -1}, { 0, -1}},
-        //     {{+1,  0}, {+1, +1}, { 0, +1}, {-1,  0}, { 0, -1}, {+1, -1}}
-        // };
 
         public int[] Adjacency(int row, int direction)
         {

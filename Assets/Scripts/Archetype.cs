@@ -5,5 +5,6 @@
         None,
         Basic,
         Rotation,
+        Collider,
     }
 }

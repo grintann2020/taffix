@@ -5,16 +5,16 @@ using Unity.Transforms;
 using Unity.Rendering;
 using Unity.Mathematics;
 using Unity.Collections;
-using UnityEngine;
+// using Unity.PhysicsCollider;
 
 namespace THEX
 {
     public class Space
     {
+        public const float HEX_RADIAN = 1.0472f;
         private ECS eCS = null;
         private HexCalculator hexCalculator = null;
-        public Hex[,] hexs = null;
-        public List<HexSide> hexSideList = new List<HexSide>();
+        public HexP[,] hexs = null;
 
         public void Init()
         {
@@ -32,14 +32,12 @@ namespace THEX
         {
             int rowsLength = hexData.GetLength(0);
             int colsLength = hexData.GetLength(1);
-            this.hexs = new Hex[rowsLength, colsLength];
-
+            this.hexs = new HexP[rowsLength, colsLength];
             // float size = 1.0f;
             // float unitWidth = (HEXSCALE * size) / 2;
             // float unitHeight = (2 * size) / 4;
             // float rowSpacing = unitWidth * 2;
             // float colSpacing = unitHeight * 3;
-
             (float colSpacing, float rowSpacing) = this.hexCalculator.DistributionDistance((float)unitSize);
             Coord startingPosition = this.hexCalculator.CenterPosition(colsLength, rowsLength, colSpacing, rowSpacing);
             for (int row = 0; row < rowsLength; row++)
@@ -54,14 +52,13 @@ namespace THEX
                     {
                         float x = startingPosition.x + col * colSpacing;
                         float y = startingPosition.y + (float)hexData[row, col];
-                        float z = startingPosition.z + row * rowSpacing;
-
+                        float z = startingPosition.z - row * rowSpacing;
                         // x += this.hexCalculator.UnitWidth((float)unitSize) * (row & 1);
                         if (row % 2 != 0)
                         {
                             x += this.hexCalculator.UnitWidth((float)unitSize);
                         }
-                        this.hexs[row, col] = new Hex(new Grid(row, col), new Coord(x, y, z));
+                        this.hexs[row, col] = new HexP(new Grid(row, col), new Coord(x, y, z));
                     }
                 }
             }
@@ -77,45 +74,44 @@ namespace THEX
 
                     if (col < colsLength - 1)
                     {
-                        this.hexs[row, col].East = this.hexs[row, col + 1];
-                    }
-
-                    if (row < rowsLength - 1 && col < colsLength - 1)
-                    {
-                        this.hexs[row, col].NorthEast = this.hexs[row + 1, col + row & 1];
-                    }
-
-                    if (row < rowsLength - 1 && col > 0)
-                    {
-                        this.hexs[row, col].NorthWest = this.hexs[row + 1, col - row & 1];
-                    }
-
-                    if (col > 0)
-                    {
-                        this.hexs[row, col].West = this.hexs[row, col - 1];
-                    }
-
-                    if (row > 0 && col > 0)
-                    {
-                        this.hexs[row, col].SouthWest = this.hexs[row - 1, col - row & 1];
+                        int[] direct = this.hexCalculator.Adjacency(row, (int)HexDirectionP.East);
+                        this.hexs[row, col].East = this.hexs[row + direct[0], col + direct[1]];
                     }
 
                     if (row > 0 && col < colsLength - 1)
                     {
-                        // direct = this.hexCalculator.Adjacency(row, (int)HexDirection.SouthEast);
-                        // Debug.Log(
-                        //     " direct = " + (int)HexDirection.SouthEast + " --- " +
-                        //     " row(" + row + " + " + direct[0] + ") = " + (row + direct[0]) + " | " +
-                        //     " col(" + col + " + " + direct[1] + ") = " + (col + direct[1])
-                        // );
-                        // this.hexs[row, col].SouthEast = this.hexs[row + direct[0], col + direct[1]];
-                        this.hexs[row, col].SouthEast = this.hexs[row - 1, col + row & 1];
+                        int[] direct = this.hexCalculator.Adjacency(row, (int)HexDirectionP.NorthEast);
+                        this.hexs[row, col].NorthEast = this.hexs[row + direct[0], col + direct[1]];
+                    }
+
+                    if (row > 0 && col > 0)
+                    {
+                        int[] direct = this.hexCalculator.Adjacency(row, (int)HexDirectionP.NorthWest);
+                        this.hexs[row, col].NorthWest = this.hexs[row + direct[0], col + direct[1]];
+                    }
+
+                    if (col > 0)
+                    {
+                        int[] direct = this.hexCalculator.Adjacency(row, (int)HexDirectionP.West);
+                        this.hexs[row, col].West = this.hexs[row + direct[0], col + direct[1]];
+                    }
+
+                    if (row < rowsLength - 1 && col > 0)
+                    {
+                        int[] direct = this.hexCalculator.Adjacency(row, (int)HexDirectionP.SouthWest);
+                        this.hexs[row, col].SouthWest = this.hexs[row + direct[0], col + direct[1]];
+                    }
+
+                    if (row < rowsLength - 1 && col < colsLength - 1)
+                    {
+                        int[] direct = this.hexCalculator.Adjacency(row, (int)HexDirectionP.SouthEast);
+                        this.hexs[row, col].SouthEast = this.hexs[row + direct[0], col + direct[1]];
                     }
                 }
             }
         }
 
-        public void Realize()
+        public void Instantiate()
         {
             NativeArray<Entity> hexArray = new NativeArray<Entity>(this.hexs.Length, Allocator.Temp);
             NativeArray<Entity> hexSideArray = new NativeArray<Entity>(this.hexs.Length * 6, Allocator.Temp);
@@ -127,20 +123,26 @@ namespace THEX
                     {
                         continue;
                     }
-                    int indexOfGrid = (row * this.hexs.GetLength(1)) + col;
-                    hexArray[indexOfGrid] = this.eCS.EntityManager.Instantiate(
-                        this.eCS.EntityDictionary[EntityCategory.Hex3][
-                            UnityEngine.Random.Range(0, this.eCS.EntityDictionary[EntityCategory.Hex3].Count)
-                        ]
-                    );
-                    this.eCS.EntityManager.SetComponentData(hexArray[indexOfGrid], new Translation
-                    {
-                        Value = new float3(
-                            this.hexs[row, col].X,
-                            this.hexs[row, col].Y,
-                            this.hexs[row, col].Z
-                        )
-                    });
+
+                    // if (this.hexs[row, col].Y < 1) // For Test
+                    // {
+
+                        int indexOfGrid = (row * this.hexs.GetLength(1)) + col;
+                        hexArray[indexOfGrid] = this.eCS.EntityManager.Instantiate(
+                            this.eCS.EntityDictionary[EntityCategory.Hex3][
+                                UnityEngine.Random.Range(0, this.eCS.EntityDictionary[EntityCategory.Hex3].Count)
+                            ]
+                        );
+                        this.eCS.EntityManager.SetComponentData(hexArray[indexOfGrid], new Translation
+                        {
+                            Value = new float3(
+                                this.hexs[row, col].X,
+                                this.hexs[row, col].Y,
+                                this.hexs[row, col].Z
+                            )
+                        }); 
+                        
+                    // }
 
                     if (this.hexs[row, col].Y == 0)
                     {
@@ -149,23 +151,29 @@ namespace THEX
 
                     for (int adj = 0; adj < 6; adj++)
                     {
-                        // Debug.Log( row * this.hexs.GetLength(0) + row  * this.hexs.GetLength(1) + adj);
                         if (this.hexs[row, col].Adjacencies[adj] == null)
                         {
                             continue;
                         }
-                        // if (this.hexs[row, col].Y <= this.hexs[row, col].Adjacencies[adj].Y)
-                        // {
-                        //     continue;
-                        // }
-                        int indexOfSide = row * this.hexs.GetLength(0) + col * 6 + adj;
-                        //----------
-                        EntityCategory hexSide = (EntityCategory)this.hexs[row, col].Y;
-                        // Debug.Log((EntityCategory)hexSide);
-                        //----------
+                        if (this.hexs[row, col].Y <= this.hexs[row, col].Adjacencies[adj].Y)
+                        {
+                            continue;
+                        }
+                        int indexOfSide = (row * this.hexs.GetLength(1)) + col * 6 + adj;
+                        // if (row == 2 && col == 2)
+                        // Debug.Log(
+                        //     "[" + row + ", " + col + "].Y = " + this.hexs[row, col].Y + " --- " +
+                        //     adj + "[" + this.hexs[row, col].Adjacencies[adj].Row + ", " + this.hexs[row, col].Adjacencies[adj].Col + "].Y = " + this.hexs[row, col].Adjacencies[adj].Y +
+                        //     // ", Coord[" + this.hexs[row, col].Adjacencies[adj].Grid.row +", " + this.hexs[row, col].Adjacencies[adj].Grid.col + "]" + 
+                        //     " ---> " +
+                        //     (EntityCategory)(this.hexs[row, col].Y - this.hexs[row, col].Adjacencies[adj].Y)
+                        // );
+                        EntityCategory hexSide = (EntityCategory)(this.hexs[row, col].Y - this.hexs[row, col].Adjacencies[adj].Y);
+
                         hexSideArray[indexOfSide] = this.eCS.EntityManager.Instantiate(
                             this.eCS.EntityDictionary[hexSide][
                                 UnityEngine.Random.Range(0, this.eCS.EntityDictionary[hexSide].Count)
+                                // adj
                             ]
                         );
                         this.eCS.EntityManager.SetComponentData(hexSideArray[indexOfSide], new Translation
@@ -178,8 +186,7 @@ namespace THEX
                         });
                         this.eCS.EntityManager.SetComponentData(hexSideArray[indexOfSide], new Rotation
                         {
-                            // quaternion rot = new Qquaternion.RotateY(0),
-                            Value = quaternion.RotateY((adj + 0) * 1.0472f)
+                            Value = quaternion.RotateY(-adj * HEX_RADIAN)
                         });
                     }
                 }
