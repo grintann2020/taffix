@@ -6,6 +6,7 @@ using Unity.Rendering;
 using Unity.Mathematics;
 using Unity.Physics;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace THEX
 {
@@ -89,7 +90,9 @@ namespace THEX
                     this._entityManager.AddSharedComponentData(newEntity, new RenderMesh
                     {
                         mesh = meshs[i],
-                        material = materials[j]
+                        material = materials[j],
+                        castShadows = ShadowCastingMode.On,
+                        receiveShadows = true
                     });
                     this._entityManager.SetComponentData(newEntity, new Translation
                     {

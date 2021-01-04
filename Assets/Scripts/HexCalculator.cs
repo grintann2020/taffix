@@ -62,7 +62,7 @@
             return new Coord(
                 -((horizontalUnitSpacing * (float)horizontalUnits) / 2) + (horizontalUnitSpacing / 2),
                 0.0f,
-                -((verticalUnitSpacing * (float)verticalUnits) / 2) + (verticalUnitSpacing / 2)
+                ((verticalUnitSpacing * (float)verticalUnits) / 2) - (verticalUnitSpacing / 2)
             );
         }
     }
