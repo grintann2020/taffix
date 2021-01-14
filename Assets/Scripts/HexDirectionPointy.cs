@@ -1,6 +1,6 @@
-namespace THEX
+namespace T
 {
-    public enum HexDirectionP
+    public enum HexDirectionPointy
     {
         East,
         NorthEast,

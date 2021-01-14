@@ -1,18 +1,13 @@
 ﻿using UnityEngine;
 
-namespace THEX
+namespace T
 {
     public class Program : MonoBehaviour
     {
         public Size size;
+        public GameObject TestHex;
         public Mesh[] hexMeshs = null;
         public Material[] hexMaterials = null;
-        public Mesh[] hexSide1Meshs = null;
-        public Material[] hexSide1Materials = null;
-        public Mesh[] hexSide2Meshs = null;
-        public Material[] hexSide2Materials = null;
-        public Mesh[] hexSide3Meshs = null;
-        public Material[] hexSide3Materials = null;
 
         private Control control = new Control();
         private Space space = new Space();
@@ -31,13 +26,22 @@ namespace THEX
 
         public void Init()
         {
-            eCS.Init();
-            eCS.Create(EntityCategory.Hex3, Archetype.Basic, hexMeshs, hexMaterials);
-            eCS.Create(EntityCategory.Hex3Side1, Archetype.Rotation, hexSide1Meshs, hexSide1Materials);
-            eCS.Create(EntityCategory.Hex3Side2, Archetype.Rotation, hexSide2Meshs, hexSide2Materials);
-            eCS.Create(EntityCategory.Hex3Side3, Archetype.Rotation, hexSide3Meshs, hexSide3Materials);
-            space.Init();
-            space.Bind(eCS, hexCalculator);
+            this.eCS.Init();
+            this.eCS.Create(EntityEnum.Hex1, ArchetypeEnum.Static, this.hexMeshs, this.hexMaterials);
+            this.space.Init();
+            this.space.Bind(this.eCS, this.hexCalculator);
+
+            int[,] testArr = new int[8, 8] {
+                {3, 0, 3, 0, 3, 0, 3, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1},
+                {3, 0, 1, 0, 3, 1, 0, 0},
+                {0, 0, 0, 0, 0, 2, 0, 1},
+                {3, 0, 1, 2, 3, 1, 3, 2},
+                {0, 0, 0, 0, 0, 0, 2, 0},
+                {0, 0, 2, 0, 0, 0, 0, 1}
+            };
+
             int[,] hArr1 = new int[11, 13] {
                 {3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -52,9 +56,7 @@ namespace THEX
                 {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
             };
 
-            //  int[,] hArr2 = new int[6, 5] {
             int[,] hArr2 = new int[5, 5] {
-                // {0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0},
                 {0, 1, 2, 0, 0},
                 {0, 1, 3, 1, 0},
@@ -62,7 +64,7 @@ namespace THEX
                 {0, 0, 0, 0, 0},
             };
 
-            space.Construct(hArr1, size);
+            space.Construct(testArr, size);
             Excute();
         }
 

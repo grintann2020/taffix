@@ -8,7 +8,7 @@ using Unity.Physics;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace THEX
+namespace T
 {
     public class ECS
     {
@@ -18,37 +18,42 @@ namespace THEX
         {
             get { return this._entityManager; }
         }
-        private Dictionary<Archetype, EntityArchetype> archetypeDictionary = new Dictionary<Archetype, EntityArchetype>();
-        private Dictionary<EntityCategory, List<Entity>> _entityDictionary = new Dictionary<EntityCategory, List<Entity>>();
-        public Dictionary<EntityCategory, List<Entity>> EntityDictionary
+        private Dictionary<ArchetypeEnum, EntityArchetype> archetypeDictionary = new Dictionary<ArchetypeEnum, EntityArchetype>();
+        // private Dictionary<EntityCategory, Entity> entityDictionary = new Dictionary<EntityCategory, Entity>();
+        private Dictionary<EntityEnum, List<Entity>> _entityDictionary = new Dictionary<EntityEnum, List<Entity>>();
+        public Dictionary<EntityEnum, List<Entity>> EntityDictionary
         {
             get { return _entityDictionary; }
         }
+
+        private ComponentType[] componentTypes;
 
         public void Init()
         {
             this._world = World.DefaultGameObjectInjectionWorld;
             this._entityManager = this._world.EntityManager;
-            foreach (Archetype archetype in Enum.GetValues(typeof(Archetype)))
+            foreach (ArchetypeEnum archetype in Enum.GetValues(typeof(ArchetypeEnum)))
             {
                 this.archetypeDictionary.Add(archetype, CreateArchetype(archetype));
             }
         }
 
-        private EntityArchetype CreateArchetype(Archetype archetype)
+        private EntityArchetype CreateArchetype(ArchetypeEnum archetype)
         {
             switch (archetype)
             {
-                case Archetype.Basic:
+                case ArchetypeEnum.None:
+                    return
+                        this._entityManager.CreateArchetype();
+                case ArchetypeEnum.Static:
                     return
                         this._entityManager.CreateArchetype(
                             typeof(Translation),
                             typeof(RenderMesh),
                             typeof(RenderBounds),
-                            typeof(LocalToWorld),
-                            typeof(PhysicsCollider)
+                            typeof(LocalToWorld)
                         );
-                case Archetype.Rotation:
+                case ArchetypeEnum.Rotatable:
                     return
                         this._entityManager.CreateArchetype(
                             typeof(Translation),
@@ -57,10 +62,11 @@ namespace THEX
                             typeof(RenderBounds),
                             typeof(LocalToWorld)
                         );
-                case Archetype.Collider:
+                case ArchetypeEnum.Interactable:
                     return
                         this._entityManager.CreateArchetype(
                             typeof(Translation),
+                            typeof(Rotation),
                             typeof(RenderMesh),
                             typeof(RenderBounds),
                             typeof(LocalToWorld),
@@ -72,21 +78,21 @@ namespace THEX
             }
         }
 
-        public void Create(EntityCategory entityCategory, Archetype archetype, Mesh[] meshs, UnityEngine.Material[] materials)
+        public void Create(EntityEnum entityEnum, ArchetypeEnum archetypeEnum, Mesh[] meshs, UnityEngine.Material[] materials)
         {
             List<Entity> newEntityList = new List<Entity>();
-            if (this._entityDictionary.ContainsKey(entityCategory))
+            if (this._entityDictionary.ContainsKey(entityEnum))
             {
-                this._entityDictionary[entityCategory].Clear();
-                this._entityDictionary.Remove(entityCategory);
+                this._entityDictionary[entityEnum].Clear();
+                this._entityDictionary.Remove(entityEnum);
             }
-            this._entityDictionary.Add(entityCategory, newEntityList);
+            this._entityDictionary.Add(entityEnum, newEntityList);
 
             for (int i = 0; i < meshs.Length; i++)
             {
                 for (int j = 0; j < materials.Length; j++)
                 {
-                    Entity newEntity = this._entityManager.CreateEntity(this.archetypeDictionary[archetype]);
+                    Entity newEntity = this._entityManager.CreateEntity(this.archetypeDictionary[archetypeEnum]);
                     this._entityManager.AddSharedComponentData(newEntity, new RenderMesh
                     {
                         mesh = meshs[i],
@@ -98,7 +104,7 @@ namespace THEX
                     {
                         Value = new float3(0.0f, 1000.0f, 0.0f)
                     });
-                    this._entityDictionary[entityCategory].Add(newEntity);
+                    this._entityDictionary[entityEnum].Add(newEntity);
                 }
             }
         }

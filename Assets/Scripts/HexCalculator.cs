@@ -1,4 +1,4 @@
-﻿namespace THEX
+﻿namespace T
 {
     public class HexCalculator
     {

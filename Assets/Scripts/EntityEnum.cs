@@ -1,7 +1,9 @@
-﻿namespace THEX
+﻿namespace T
 {
-    public enum EntityCategory
+    public enum EntityEnum
     {
+        TestHex,
+        Hex1,
         Hex3,
         Hex3Side1,
         Hex3Side2,

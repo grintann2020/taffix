@@ -1,17 +1,17 @@
-﻿namespace THEX
+﻿namespace T
 {
     public class Singleton<T> where T : new()
     {
-        private static T _ins;
-        public static T Ins
+        private static T _instance;
+        public static T Instance
         {
             get
             {
-                if (_ins == null)
+                if (_instance == null)
                 {
-                    _ins = new T();
+                    _instance = new T();
                 }
-                return _ins;
+                return _instance;
             }
         }
     }

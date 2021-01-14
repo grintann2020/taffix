@@ -1,6 +1,6 @@
-namespace THEX
+namespace T
 {
-    public enum HexDirectionF
+    public enum HexDirectionFlat
     {
         NorthEast,
         North,
