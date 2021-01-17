@@ -1,6 +1,6 @@
 ﻿namespace T
 {
-    public class HexCalculator
+    public class HexagonCalculator
     {
         private const float ASPECT_RATIO = 1.732050807568877f;
 

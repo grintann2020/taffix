@@ -1,6 +1,6 @@
-namespace THEX
+namespace T
 {
-    public enum CardinalDirection
+    public enum ECardinalDirection
     {
         North,
         NorthEast,

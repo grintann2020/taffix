@@ -1,12 +1,12 @@
 namespace T
 {
-    public enum HexDirectionFlat
+    public enum EHexagonDirection
     {
+        East,
         NorthEast,
-        North,
         NorthWest,
+        West,
         SouthWest,
-        South,
-        SouthEast,
+        SouthEast
     }
 }

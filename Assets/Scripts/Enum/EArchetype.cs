@@ -1,6 +1,6 @@
 ﻿namespace T
 {
-    public enum ArchetypeEnum
+    public enum EArchetype
     {
         None,
         Static,

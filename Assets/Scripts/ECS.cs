@@ -18,10 +18,10 @@ namespace T
         {
             get { return this._entityManager; }
         }
-        private Dictionary<ArchetypeEnum, EntityArchetype> archetypeDictionary = new Dictionary<ArchetypeEnum, EntityArchetype>();
+        private Dictionary<EArchetype, EntityArchetype> archetypeDictionary = new Dictionary<EArchetype, EntityArchetype>();
         // private Dictionary<EntityCategory, Entity> entityDictionary = new Dictionary<EntityCategory, Entity>();
-        private Dictionary<EntityEnum, List<Entity>> _entityDictionary = new Dictionary<EntityEnum, List<Entity>>();
-        public Dictionary<EntityEnum, List<Entity>> EntityDictionary
+        private Dictionary<EEntities, List<Entity>> _entityDictionary = new Dictionary<EEntities, List<Entity>>();
+        public Dictionary<EEntities, List<Entity>> EntityDictionary
         {
             get { return _entityDictionary; }
         }
@@ -32,20 +32,20 @@ namespace T
         {
             this._world = World.DefaultGameObjectInjectionWorld;
             this._entityManager = this._world.EntityManager;
-            foreach (ArchetypeEnum archetype in Enum.GetValues(typeof(ArchetypeEnum)))
+            foreach (EArchetype archetype in Enum.GetValues(typeof(EArchetype)))
             {
                 this.archetypeDictionary.Add(archetype, CreateArchetype(archetype));
             }
         }
 
-        private EntityArchetype CreateArchetype(ArchetypeEnum archetype)
+        private EntityArchetype CreateArchetype(EArchetype archetype)
         {
             switch (archetype)
             {
-                case ArchetypeEnum.None:
+                case EArchetype.None:
                     return
                         this._entityManager.CreateArchetype();
-                case ArchetypeEnum.Static:
+                case EArchetype.Static:
                     return
                         this._entityManager.CreateArchetype(
                             typeof(Translation),
@@ -53,7 +53,7 @@ namespace T
                             typeof(RenderBounds),
                             typeof(LocalToWorld)
                         );
-                case ArchetypeEnum.Rotatable:
+                case EArchetype.Rotatable:
                     return
                         this._entityManager.CreateArchetype(
                             typeof(Translation),
@@ -62,7 +62,7 @@ namespace T
                             typeof(RenderBounds),
                             typeof(LocalToWorld)
                         );
-                case ArchetypeEnum.Interactable:
+                case EArchetype.Interactable:
                     return
                         this._entityManager.CreateArchetype(
                             typeof(Translation),
@@ -78,21 +78,21 @@ namespace T
             }
         }
 
-        public void Create(EntityEnum entityEnum, ArchetypeEnum archetypeEnum, Mesh[] meshs, UnityEngine.Material[] materials)
+        public void Create(EEntities eEntities, EArchetype eArchetype, Mesh[] meshs, UnityEngine.Material[] materials)
         {
             List<Entity> newEntityList = new List<Entity>();
-            if (this._entityDictionary.ContainsKey(entityEnum))
+            if (this._entityDictionary.ContainsKey(eEntities))
             {
-                this._entityDictionary[entityEnum].Clear();
-                this._entityDictionary.Remove(entityEnum);
+                this._entityDictionary[eEntities].Clear();
+                this._entityDictionary.Remove(eEntities);
             }
-            this._entityDictionary.Add(entityEnum, newEntityList);
+            this._entityDictionary.Add(eEntities, newEntityList);
 
             for (int i = 0; i < meshs.Length; i++)
             {
                 for (int j = 0; j < materials.Length; j++)
                 {
-                    Entity newEntity = this._entityManager.CreateEntity(this.archetypeDictionary[archetypeEnum]);
+                    Entity newEntity = this._entityManager.CreateEntity(this.archetypeDictionary[eArchetype]);
                     this._entityManager.AddSharedComponentData(newEntity, new RenderMesh
                     {
                         mesh = meshs[i],
@@ -104,7 +104,7 @@ namespace T
                     {
                         Value = new float3(0.0f, 1000.0f, 0.0f)
                     });
-                    this._entityDictionary[entityEnum].Add(newEntity);
+                    this._entityDictionary[eEntities].Add(newEntity);
                 }
             }
         }

@@ -4,15 +4,18 @@ namespace T
 {
     public class Program : MonoBehaviour
     {
-        public Size size;
-        public GameObject TestHex;
+        public ColorSchemeSO[] colorSchemes;
+        
         public Mesh[] hexMeshs = null;
         public Material[] hexMaterials = null;
 
+        public ESize size;
+
+        private Data data = new Data();
         private Control control = new Control();
         private Space space = new Space();
         private ECS eCS = new ECS();
-        private HexCalculator hexCalculator = new HexCalculator();
+        private HexagonCalculator hexCalculator = new HexagonCalculator();
 
         void Start()
         {
@@ -26,8 +29,13 @@ namespace T
 
         public void Init()
         {
+            colorSchemes[0].Init();
+
+            // Debug.Log(colorSchemes[0].colorDictionary[EColor.Red].levels[0].linear);
+
+            this.data.Init();
             this.eCS.Init();
-            this.eCS.Create(EntityEnum.Hex1, ArchetypeEnum.Static, this.hexMeshs, this.hexMaterials);
+            this.eCS.Create(EEntities.Hexagon_A_01, EArchetype.Static, this.hexMeshs, this.hexMaterials);
             this.space.Init();
             this.space.Bind(this.eCS, this.hexCalculator);
 
