@@ -1,11 +1,9 @@
 ﻿namespace T
 {
-    public enum EColor
+    public enum EColorSet
     {
         Clear,
-        Red_A_1, Red_A_2, Red_A_3,
-        Green_A_1, Green_A_2, Green_A_3,
-        Blue, 
+        Red, Green, Blue, 
         Cyan, Magenta, Yellow, Black,
         Gray, White,
         // Fuchsia, Aqua, 

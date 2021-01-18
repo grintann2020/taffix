@@ -4,8 +4,9 @@ namespace T
 {
     public class Program : MonoBehaviour
     {
+        public ColorSO colorSO = null;
         public ColorSchemeSO[] colorSchemes;
-        
+
         public Mesh[] hexMeshs = null;
         public Material[] hexMaterials = null;
 
@@ -19,6 +20,9 @@ namespace T
 
         void Start()
         {
+            // colorSO = new ColorSO();
+            Debug.Log("rgb -- " + colorSO.r + ", " + colorSO.g + ", " + colorSO.b);
+            Debug.Log(colorSO.SRGB.r + ", " + colorSO.SRGB.g + ", " + colorSO.SRGB.b);
             Init();
         }
 

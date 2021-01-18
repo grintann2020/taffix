@@ -13,10 +13,10 @@ namespace T
         {
             
 
-            for (int c = 0; c < colors.Length; c++)
-            {
-                colorDictionary.Add(colors[c].eColor, colors[c]);
-            }
+            // for (int c = 0; c < colors.Length; c++)
+            // {
+            //     colorDictionary.Add(colors[c].eColor, colors[c]);
+            // }
         }
     }
 }

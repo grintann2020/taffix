@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Blue
   m_EditorClassIdentifier: 
   eColor: 3
-  levels:
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 0, g: 0, b: 1, a: 1}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  r: 0
+  g: 0
+  b: 0
+  level: 0

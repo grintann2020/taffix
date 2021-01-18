@@ -7,16 +7,11 @@ namespace T
     public class ColorSchemeSO : ScriptableObject
     {
         public ColorSO[] colors;
-        public Dictionary<EColor, ColorSO> colorDictionary = new Dictionary<EColor, ColorSO>();
+        public Dictionary<EColorSet, ColorSetSO> colorSetDictionary = new Dictionary<EColorSet, ColorSetSO>();
 
         public void Init()
         {
-            
 
-            for (int c = 0; c < colors.Length; c++)
-            {
-                colorDictionary.Add(colors[c].eColor, colors[c]);
-            }
         }
     }
 }
