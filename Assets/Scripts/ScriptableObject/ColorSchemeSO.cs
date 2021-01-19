@@ -6,12 +6,7 @@ namespace T
     [CreateAssetMenu(fileName = "ColorSchemeSO", menuName = "ScriptableObject/ColorSchemeSO", order = 1)]
     public class ColorSchemeSO : ScriptableObject
     {
-        public ColorSO[] colors;
-        public Dictionary<EColorSet, ColorSetSO> colorSetDictionary = new Dictionary<EColorSet, ColorSetSO>();
-
-        public void Init()
-        {
-
-        }
+        public ColorSetSO[] colorSetSOs;
+        
     }
 }

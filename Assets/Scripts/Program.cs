@@ -33,7 +33,7 @@ namespace T
 
         public void Init()
         {
-            colorSchemes[0].Init();
+            // colorSchemes[0].Init();
 
             // Debug.Log(colorSchemes[0].colorDictionary[EColor.Red].levels[0].linear);
 

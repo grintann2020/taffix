@@ -8,7 +8,8 @@ namespace T
     {
         public ColorSchemeSO[] schemes;
         public Dictionary<EColor, ColorSO> colorDictionary = new Dictionary<EColor, ColorSO>();
-
+        public Dictionary<EColorSet, ColorSetSO> colorSetSODictionary = new Dictionary<EColorSet, ColorSetSO>();
+        
         public void Init()
         {
             
