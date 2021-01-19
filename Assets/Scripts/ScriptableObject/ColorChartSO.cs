@@ -7,10 +7,12 @@ namespace T
     public class ColorChartSO : ScriptableObject
     {
         public ColorSchemeSO[] schemes;
-        public Dictionary<EColor, ColorSO> colorDictionary = new Dictionary<EColor, ColorSO>();
+        // public Dictionary<EColorSet, ColorSetSO> colorSetSODictionary = new Dictionary<EColorSet, ColorSetSO>();
         public Dictionary<EColorSet, ColorSetSO> colorSetSODictionary = new Dictionary<EColorSet, ColorSetSO>();
+        public Dictionary<EColor, ColorSO> colorSODictionary = new Dictionary<EColor, ColorSO>();
         
-        public void Init()
+        
+        public void Initialize()
         {
             
 

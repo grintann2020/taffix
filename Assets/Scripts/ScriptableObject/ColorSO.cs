@@ -5,8 +5,9 @@ namespace T
     [CreateAssetMenu(fileName = "ColorSO", menuName = "ScriptableObject/ColorSO", order = 1)]
     public class ColorSO : ScriptableObject
     {   
-        public EColorSet eColorSet = EColorSet.Clear;
-        public EColor eColor = EColor.Clear;
+        public EColorScheme eColorScheme = EColorScheme.None;
+        public EColorSet eColorSet = EColorSet.None;
+        public EColor eColor = EColor.None;
         public Color color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
         public byte r, g, b = 0;
         public SRGB SRGB

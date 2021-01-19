@@ -10,8 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2abbdb747aa611d4aaca389099b1cad3, type: 3}
-  m_Name: Cyan
+  m_Name: Yellow_0_0
   m_EditorClassIdentifier: 
-  eColor: 4
-  levels:
-  - {r: 0, g: 0, b: 0, a: 0}
+  eColorScheme: 2
+  eColorSet: 6
+  eColor: 16
+  color: {r: 0.9411765, g: 0.9411765, b: 0, a: 0}
+  r: 240
+  g: 240
+  b: 0
+  level: 0

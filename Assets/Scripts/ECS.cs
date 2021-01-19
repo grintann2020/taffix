@@ -28,7 +28,7 @@ namespace T
 
         private ComponentType[] componentTypes;
 
-        public void Init()
+        public void Initialize()
         {
             this._world = World.DefaultGameObjectInjectionWorld;
             this._entityManager = this._world.EntityManager;

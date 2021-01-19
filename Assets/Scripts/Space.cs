@@ -16,7 +16,7 @@ namespace T
         private HexagonCalculator hexCalculator = null;
         public Hexagon[,] hexs = null;
 
-        public void Init()
+        public void Initialize()
         {
 
         }

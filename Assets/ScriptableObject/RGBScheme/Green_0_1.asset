@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2abbdb747aa611d4aaca389099b1cad3, type: 3}
-  m_Name: Blue
+  m_Name: Green_0_1
   m_EditorClassIdentifier: 
-  eColor: 3
-  color: {r: 0, g: 0, b: 0, a: 0}
+  eColorScheme: 1
+  eColorSet: 2
+  eColor: 5
+  color: {r: 0, g: 0.78431374, b: 0, a: 0}
   r: 0
   g: 0
-  b: 0
-  level: 0
+  b: 200
+  level: 1

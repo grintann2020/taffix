@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83c346d7f4f74744847ba4312f14a4d, type: 3}
-  m_Name: CMYKScheme
+  m_Script: {fileID: 11500000, guid: 939886e7b05833446b1a04624870ac80, type: 3}
+  m_Name: CyanSet_0
   m_EditorClassIdentifier: 
-  colors:
+  eColorSet: 4
+  colorSOs:
   - {fileID: 11400000, guid: 5272dcb79e0cb954cbfc2dc2836faa01, type: 2}
-  - {fileID: 11400000, guid: 7b733ae3fa168b74d9f91ae7e14b685a, type: 2}
-  - {fileID: 11400000, guid: c1c12fb09b16b0446ab7e0e8a0ff6331, type: 2}
-  - {fileID: 11400000, guid: c0906b6344f7e664297b3f02a01bcd1d, type: 2}

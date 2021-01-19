@@ -4,7 +4,7 @@
     {
         public ColorSchemeSO[] colorSchemes;
 
-        public void Init()
+        public void Initialize()
         {
 
         }

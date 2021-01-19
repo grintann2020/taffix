@@ -4,8 +4,8 @@ namespace T
 {
     public class Program : MonoBehaviour
     {
-        public ColorSO colorSO = null;
-        public ColorSchemeSO[] colorSchemes;
+        public ColorChartSO colorChartSO = null;
+        // public ColorSchemeSO[] colorSchemes;
 
         public Mesh[] hexMeshs = null;
         public Material[] hexMaterials = null;
@@ -20,10 +20,11 @@ namespace T
 
         void Start()
         {
+            
             // colorSO = new ColorSO();
-            Debug.Log("rgb -- " + colorSO.r + ", " + colorSO.g + ", " + colorSO.b);
-            Debug.Log(colorSO.SRGB.r + ", " + colorSO.SRGB.g + ", " + colorSO.SRGB.b);
-            Init();
+            // Debug.Log("rgb -- " + colorSO.r + ", " + colorSO.g + ", " + colorSO.b);
+            // Debug.Log(colorSO.SRGB.r + ", " + colorSO.SRGB.g + ", " + colorSO.SRGB.b);
+            this.Initialize();
         }
 
         void Update()
@@ -31,16 +32,19 @@ namespace T
 
         }
 
-        public void Init()
+        public void Initialize()
         {
-            // colorSchemes[0].Init();
+            if (this.colorChartSO != null)
+            {
+                this.colorChartSO.Initialize();
+            }
 
             // Debug.Log(colorSchemes[0].colorDictionary[EColor.Red].levels[0].linear);
 
-            this.data.Init();
-            this.eCS.Init();
+            this.data.Initialize();
+            this.eCS.Initialize();
             this.eCS.Create(EEntities.Hexagon_A_01, EArchetype.Static, this.hexMeshs, this.hexMaterials);
-            this.space.Init();
+            this.space.Initialize();
             this.space.Bind(this.eCS, this.hexCalculator);
 
             int[,] testArr = new int[8, 8] {
