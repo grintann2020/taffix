@@ -2,10 +2,10 @@
 
 namespace T
 {
-    [CreateAssetMenu(fileName = "ColorSetSO", menuName = "ScriptableObject/ColorSetSO", order = 1)]
-    public class ColorSetSO : ScriptableObject
+    [CreateAssetMenu(fileName = "ColorSetSo", menuName = "ScriptableObject/ColorSetSo", order = 1)]
+    public class ColorSetSo : ScriptableObject
     {
-        public EColorSet eColorSet = EColorSet.None;
-        public ColorSO[] colorSOs;
+        public EColorSet EColorSet = EColorSet.None;
+        public ColorSo[] ColorSoArray;
     }
 }

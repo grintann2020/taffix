@@ -2,25 +2,25 @@
 
 namespace T
 {
-    [CreateAssetMenu(fileName = "ColorSO", menuName = "ScriptableObject/ColorSO", order = 1)]
-    public class ColorSO : ScriptableObject
+    [CreateAssetMenu(fileName = "ColorSo", menuName = "ScriptableObject/ColorSo", order = 1)]
+    public class ColorSo : ScriptableObject
     {   
-        public EColorScheme eColorScheme = EColorScheme.None;
-        public EColorSet eColorSet = EColorSet.None;
-        public EColor eColor = EColor.None;
-        public Color color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        public byte r, g, b = 0;
-        public SRGB SRGB
+        public EColorScheme EColorScheme = EColorScheme.None;
+        public EColorSet EColorSet = EColorSet.None;
+        public EColor EColor = EColor.None;
+        public Color Color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        public byte R, G, B = 0;
+        public SRgb SRgb
         {
             get
             {
-                return new SRGB(r, g, b);
+                return new SRgb(R, G, B);
             }
             set
             {
-                this.r = value.r;
-                this.g = value.g;
-                this.b = value.b;
+                this.R = value.R;
+                this.G = value.G;
+                this.B = value.B;
             }
         }
         public byte level = 0;

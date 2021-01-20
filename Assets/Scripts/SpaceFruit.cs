@@ -12,7 +12,7 @@ namespace T
     public class SpaceFruit
     {
         public const float HEX_RADIAN = 1.0472f;
-        private ECS eCS = null;
+        private Ecs _ecs = null;
         private HexagonCalculator hexCalculator = null;
         public Hexagon[,] hexs = null;
 
@@ -21,9 +21,9 @@ namespace T
 
         }
 
-        public void Bind(ECS eCS, HexagonCalculator hexCalculator)
+        public void Bind(Ecs ecs, HexagonCalculator hexCalculator)
         {
-            this.eCS = eCS;
+            _ecs = ecs;
             this.hexCalculator = hexCalculator;
         }
 
@@ -50,9 +50,9 @@ namespace T
                     }
                     else
                     {
-                        float x = startingPosition.x + col * colSpacing;
-                        float y = startingPosition.y + (float)hexData[row, col];
-                        float z = startingPosition.z - row * rowSpacing;
+                        float x = startingPosition.X + col * colSpacing;
+                        float y = startingPosition.Y + (float)hexData[row, col];
+                        float z = startingPosition.Z - row * rowSpacing;
                         // x += this.hexCalculator.UnitWidth((float)unitSize) * (row & 1);
                         if (row % 2 != 0)
                         {
@@ -128,12 +128,12 @@ namespace T
                     // {
 
                         int indexOfGrid = (row * this.hexs.GetLength(1)) + col;
-                        hexArray[indexOfGrid] = this.eCS.EntityManager.Instantiate(
-                            this.eCS.EntityDictionary[EEntities.Hexagon_A_01][
-                                UnityEngine.Random.Range(0, this.eCS.EntityDictionary[EEntities.Hexagon_A_01].Count)
+                        hexArray[indexOfGrid] = _ecs.EntityManager.Instantiate(
+                            _ecs.EntityDictionary[EEntities.Hexagon_A_01][
+                                UnityEngine.Random.Range(0, _ecs.EntityDictionary[EEntities.Hexagon_A_01].Count)
                             ]
                         );
-                        this.eCS.EntityManager.SetComponentData(hexArray[indexOfGrid], new Translation
+                        _ecs.EntityManager.SetComponentData(hexArray[indexOfGrid], new Translation
                         {
                             Value = new float3(
                                 this.hexs[row, col].X,
@@ -170,13 +170,13 @@ namespace T
                         // );
                         EEntities hexSide = (EEntities)(this.hexs[row, col].Y - this.hexs[row, col].Adjacencies[adj].Y);
 
-                        hexSideArray[indexOfSide] = this.eCS.EntityManager.Instantiate(
-                            this.eCS.EntityDictionary[hexSide][
-                                UnityEngine.Random.Range(0, this.eCS.EntityDictionary[hexSide].Count)
+                        hexSideArray[indexOfSide] = _ecs.EntityManager.Instantiate(
+                            _ecs.EntityDictionary[hexSide][
+                                UnityEngine.Random.Range(0, _ecs.EntityDictionary[hexSide].Count)
                                 // adj
                             ]
                         );
-                        this.eCS.EntityManager.SetComponentData(hexSideArray[indexOfSide], new Translation
+                        _ecs.EntityManager.SetComponentData(hexSideArray[indexOfSide], new Translation
                         {
                             Value = new float3(
                                 this.hexs[row, col].X,
@@ -184,7 +184,7 @@ namespace T
                                 this.hexs[row, col].Z
                             )
                         });
-                        this.eCS.EntityManager.SetComponentData(hexSideArray[indexOfSide], new Rotation
+                        _ecs.EntityManager.SetComponentData(hexSideArray[indexOfSide], new Rotation
                         {
                             Value = quaternion.RotateY(-adj * HEX_RADIAN)
                         });

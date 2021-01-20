@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 
 namespace T
 {
-    public class ECS
+    public class Ecs
     {
         private World _world;
         private EntityManager _entityManager;

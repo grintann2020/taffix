@@ -4,12 +4,12 @@ using UnityEngine;
 namespace T
 {
     [CreateAssetMenu(fileName = "ColorChartSO", menuName = "ScriptableObject/ColorChartSO", order = 1)]
-    public class ColorChartSO : ScriptableObject
+    public class ColorChartSo : ScriptableObject, IData
     {
-        public ColorSchemeSO[] schemes;
+        public ColorSchemeSo[] Schemes;
         // public Dictionary<EColorSet, ColorSetSO> colorSetSODictionary = new Dictionary<EColorSet, ColorSetSO>();
-        public Dictionary<EColorSet, ColorSetSO> colorSetSODictionary = new Dictionary<EColorSet, ColorSetSO>();
-        public Dictionary<EColor, ColorSO> colorSODictionary = new Dictionary<EColor, ColorSO>();
+        public Dictionary<EColorSet, ColorSetSo> ColorSetSoDictionary = new Dictionary<EColorSet, ColorSetSo>();
+        public Dictionary<EColor, ColorSo> ColorSoDictionary = new Dictionary<EColor, ColorSo>();
         
         
         public void Initialize()

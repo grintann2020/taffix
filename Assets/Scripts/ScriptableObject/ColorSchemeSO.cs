@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace T
 {
-    [CreateAssetMenu(fileName = "ColorSchemeSO", menuName = "ScriptableObject/ColorSchemeSO", order = 1)]
-    public class ColorSchemeSO : ScriptableObject
+    [CreateAssetMenu(fileName = "ColorSchemeSo", menuName = "ScriptableObject/ColorSchemeSo", order = 1)]
+    public class ColorSchemeSo : ScriptableObject
     {
-        public EColorScheme eColorScheme;
-        public ColorSetSO[] colorSetSOs;
+        public EColorScheme EColorScheme;
+        public ColorSetSo[] colorSetSoArray;
     }
 }

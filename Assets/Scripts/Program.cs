@@ -4,18 +4,16 @@ namespace T
 {
     public class Program : MonoBehaviour
     {
-        public ColorChartSO colorChartSO = null;
-        // public ColorSchemeSO[] colorSchemes;
-
+        public DataSetSo DataSetSo = null;
         public Mesh[] hexMeshs = null;
         public Material[] hexMaterials = null;
 
         public ESize size;
 
-        private Data data = new Data();
-        private Control control = new Control();
-        private Space space = new Space();
-        private ECS eCS = new ECS();
+        
+        private Control _control = new Control();
+        private Space _space = new Space();
+        private Ecs _ecs = new Ecs();
         private HexagonCalculator hexCalculator = new HexagonCalculator();
 
         void Start()
@@ -34,18 +32,14 @@ namespace T
 
         public void Initialize()
         {
-            if (this.colorChartSO != null)
-            {
-                this.colorChartSO.Initialize();
-            }
+            DataSetSo.Initialize();
 
             // Debug.Log(colorSchemes[0].colorDictionary[EColor.Red].levels[0].linear);
 
-            this.data.Initialize();
-            this.eCS.Initialize();
-            this.eCS.Create(EEntities.Hexagon_A_01, EArchetype.Static, this.hexMeshs, this.hexMaterials);
-            this.space.Initialize();
-            this.space.Bind(this.eCS, this.hexCalculator);
+            _ecs.Initialize();
+            _ecs.Create(EEntities.Hexagon_A_01, EArchetype.Static, hexMeshs, hexMaterials);
+            _space.Initialize();
+            _space.Bind(_ecs, hexCalculator);
 
             int[,] testArr = new int[8, 8] {
                 {3, 0, 3, 0, 3, 0, 3, 0},
@@ -80,13 +74,13 @@ namespace T
                 {0, 0, 0, 0, 0},
             };
 
-            space.Construct(testArr, size);
+            _space.Construct(testArr, size);
             Excute();
         }
 
         public void Excute()
         {
-            space.Instantiate();
+            _space.Instantiate();
         }
     }
 }
