@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace T
 {
-    [CreateAssetMenu(fileName = "ColorChartSO", menuName = "ScriptableObject/ColorChartSO", order = 1)]
-    public class ColorChartSo : ScriptableObject, IData
+    [CreateAssetMenu(fileName = "ColorChartSo", menuName = "ScriptableObject/ColorChartSo", order = 1)]
+    public class ColorChartSo : ScriptableObject
     {
         public ColorSchemeSo[] Schemes;
         // public Dictionary<EColorSet, ColorSetSO> colorSetSODictionary = new Dictionary<EColorSet, ColorSetSO>();
