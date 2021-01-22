@@ -2,19 +2,19 @@
 
 namespace T
 {
-    [CreateAssetMenu(fileName = "ColorSo", menuName = "ScriptableObject/ColorSo", order = 1)]
-    public class ColorSo : ScriptableObject
+    [CreateAssetMenu(fileName = "ColorSO", menuName = "ScriptableObject/ColorSO", order = 1)]
+    public class ColorSO : ScriptableObject
     {   
         public EColorScheme EColorScheme = EColorScheme.None;
         public EColorSet EColorSet = EColorSet.None;
         public EColor EColor = EColor.None;
         public Color Color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
         public byte R, G, B = 0;
-        public SRgb SRgb
+        public SRGB SRGB
         {
             get
             {
-                return new SRgb(R, G, B);
+                return new SRGB(R, G, B);
             }
             set
             {
@@ -23,6 +23,6 @@ namespace T
                 this.B = value.B;
             }
         }
-        public byte level = 0;
+        public byte Level = 0;
     }
 }

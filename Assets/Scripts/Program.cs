@@ -4,7 +4,7 @@ namespace T
 {
     public class Program : MonoBehaviour
     {
-        public DataSetSo DataSetSo = null;
+        public DataSetSO DataSetSO = null;
         public Mesh[] hexMeshs = null;
         public Material[] hexMaterials = null;
 
@@ -32,7 +32,7 @@ namespace T
 
         public void Initialize()
         {
-            DataSetSo.Initialize();
+            DataSetSO.Initialize();
 
             // Debug.Log(colorSchemes[0].colorDictionary[EColor.Red].levels[0].linear);
 

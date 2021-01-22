@@ -1,16 +1,16 @@
 ﻿namespace T
 {
-    public struct SRgb
+    public struct SRGB
     {
         public byte R;
         public byte G;
         public byte B;
 
-        public SRgb(byte R, byte G, byte B)
+        public SRGB(byte r, byte g, byte b)
         {
-            this.R = R;
-            this.G = G;
-            this.B = B;
+            this.R = r;
+            this.G = g;
+            this.B = b;
         }
     }
 }

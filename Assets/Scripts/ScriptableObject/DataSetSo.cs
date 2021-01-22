@@ -2,13 +2,13 @@
 
 namespace T
 {
-    [CreateAssetMenu(fileName = "DataSetSo", menuName = "ScriptableObject/DataSetSo", order = 1)]
-    public class DataSetSo : ScriptableObject
+    [CreateAssetMenu(fileName = "DataSetSO", menuName = "ScriptableObject/DataSetSO", order = 1)]
+    public class DataSetSO : ScriptableObject
     {
-        public ScriptableObject[] scriptableObjectArray;
+        public ScriptableObject[] ScriptableObjectArray;
         public void Initialize()
         {
-            // ((ColorChartSo)scriptableObjectArray[2]).
+            ((IData)ScriptableObjectArray[2]).Initialize();
 
         }
     }

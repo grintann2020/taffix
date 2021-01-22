@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace T
 {
-    [CreateAssetMenu(fileName = "ColorChartSo", menuName = "ScriptableObject/ColorChartSo", order = 1)]
-    public class ColorChartSo : ScriptableObject
+    [CreateAssetMenu(fileName = "ColorChartSO", menuName = "ScriptableObject/ColorChartSO", order = 1)]
+    public class ColorChartSO : ScriptableObject, IData
     {
-        public ColorSchemeSo[] Schemes;
+        public ColorSchemeSO[] ColorSchemeArray;
         // public Dictionary<EColorSet, ColorSetSO> colorSetSODictionary = new Dictionary<EColorSet, ColorSetSO>();
-        public Dictionary<EColorSet, ColorSetSo> ColorSetSoDictionary = new Dictionary<EColorSet, ColorSetSo>();
-        public Dictionary<EColor, ColorSo> ColorSoDictionary = new Dictionary<EColor, ColorSo>();
+        public Dictionary<EColorSet, ColorSetSO> ColorSetSoDictionary = new Dictionary<EColorSet, ColorSetSO>();
+        public Dictionary<EColor, ColorSO> ColorSoDictionary = new Dictionary<EColor, ColorSO>();
         
         
         public void Initialize()
