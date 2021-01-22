@@ -1,7 +1,5 @@
-﻿namespace T
-{
-    public enum EArchetype
-    {
+﻿namespace T {
+    public enum EArchetype {
         None,
         Static,
         Rotatable,

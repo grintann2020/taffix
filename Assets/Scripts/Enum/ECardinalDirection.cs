@@ -1,7 +1,5 @@
-namespace T
-{
-    public enum ECardinalDirection
-    {
+namespace T {
+    public enum ECardinalDirection {
         North,
         NorthEast,
         East,

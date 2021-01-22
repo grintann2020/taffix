@@ -1,11 +1,9 @@
-﻿namespace T
-{
-    public enum EColorScheme
-    {
-        None, 
-        
+﻿namespace T {
+    public enum EColorScheme {
+        None,
+
         //----- RGB ----------
-        RGBScheme, 
+        RGBScheme,
 
         //----- CMYK ----------
         CMYKScheme,

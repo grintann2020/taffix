@@ -1,9 +1,6 @@
-﻿namespace T
-{
-    public class Control
-    {
-        public void InvokeUpdate()
-        {
+﻿namespace T {
+    public class Control {
+        public void InvokeUpdate() {
 
         }
     }

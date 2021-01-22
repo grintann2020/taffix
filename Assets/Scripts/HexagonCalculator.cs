@@ -1,7 +1,5 @@
-﻿namespace T
-{
-    public class HexagonCalculator
-    {
+﻿namespace T {
+    public class HexagonCalculator {
         private const float ASPECT_RATIO = 1.732050807568877f;
 
         private int[,][] directions = {
@@ -9,8 +7,7 @@
             {new int[]{0, +1}, new int[]{-1, +1}, new int[]{-1,  0}, new int[]{0, -1}, new int[]{+1,  0}, new int[]{+1, +1}}
         };
 
-        public int[] Adjacency(int row, int direction)
-        {
+        public int[] Adjacency(int row, int direction) {
             int parity = row & 1;
             return this.directions[parity, direction];
         }
@@ -32,33 +29,27 @@
         //     return hexs[hex.Row + direct[0], hex.Col + direct[1]];
         // }
 
-        public (float horizontalDistance, float verticalDistance) DistributionDistance(float size)
-        {
+        public (float horizontalDistance, float verticalDistance) DistributionDistance(float size) {
             return (HorizontalDistance(size), VerticalDistance(size));
         }
 
-        public float HorizontalDistance(float size)
-        {
+        public float HorizontalDistance(float size) {
             return UnitWidth(size) * 2;
         }
 
-        public float VerticalDistance(float size)
-        {
+        public float VerticalDistance(float size) {
             return UnitHeight(size) * 3;
         }
 
-        public float UnitWidth(float size)
-        {
+        public float UnitWidth(float size) {
             return (size * ASPECT_RATIO) / 2;
         }
 
-        public float UnitHeight(float size)
-        {
+        public float UnitHeight(float size) {
             return (size * 2) / 4;
         }
 
-        public Coord CenterPosition(int horizontalUnits, int verticalUnits, float horizontalUnitSpacing, float verticalUnitSpacing)
-        {
+        public Coord CenterPosition(int horizontalUnits, int verticalUnits, float horizontalUnitSpacing, float verticalUnitSpacing) {
             return new Coord(
                 -((horizontalUnitSpacing * (float)horizontalUnits) / 2) + (horizontalUnitSpacing / 2),
                 0.0f,

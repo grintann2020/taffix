@@ -1,7 +1,5 @@
-namespace T
-{
-    public enum EHexagonDirection
-    {
+namespace T {
+    public enum EHexagonDirection {
         East,
         NorthEast,
         NorthWest,

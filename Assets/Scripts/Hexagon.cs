@@ -1,14 +1,12 @@
-﻿namespace T
-{
-    public class Hexagon
-    {
+﻿namespace T {
+    public class Hexagon {
         private Grid _grid;
         private Coord _coord;
         private Hexagon[] _adjacencies = new Hexagon[6];
         public Grid Grid { get { return this._grid; } }
         public Coord Coord { get { return this._coord; } }
-        public int Row { get { return _grid.row; } }
-        public int Col { get { return _grid.col; } }
+        public int Row { get { return _grid.Row; } }
+        public int Col { get { return _grid.Col; } }
         public float X { get { return _coord.X; } }
         public float Z { get { return _coord.Z; } }
         public float Y { get { return _coord.Y; } }
@@ -20,12 +18,10 @@
         public Hexagon SouthWest { get { return this._adjacencies[4]; } set { this._adjacencies[4] = value; } }
         public Hexagon SouthEast { get { return this._adjacencies[5]; } set { this._adjacencies[5] = value; } }
 
-        public Hexagon(Grid grid, Coord coord)
-        {
+        public Hexagon(Grid grid, Coord coord) {
             _grid = grid;
             _coord = coord;
-            for (int i = 0; i < 6; i++)
-            {
+            for (int i = 0; i < 6; i++) {
                 _adjacencies[i] = null;
             }
         }

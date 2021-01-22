@@ -8,40 +8,32 @@ using Unity.Physics;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace T
-{
-    public class Ecs
-    {
+namespace T {
+    public class ECS {
         private World _world;
         private EntityManager _entityManager;
-        public EntityManager EntityManager
-        {
+        public EntityManager EntityManager {
             get { return this._entityManager; }
         }
         private Dictionary<EArchetype, EntityArchetype> archetypeDictionary = new Dictionary<EArchetype, EntityArchetype>();
         // private Dictionary<EntityCategory, Entity> entityDictionary = new Dictionary<EntityCategory, Entity>();
         private Dictionary<EEntities, List<Entity>> _entityDictionary = new Dictionary<EEntities, List<Entity>>();
-        public Dictionary<EEntities, List<Entity>> EntityDictionary
-        {
+        public Dictionary<EEntities, List<Entity>> EntityDictionary {
             get { return _entityDictionary; }
         }
 
         private ComponentType[] componentTypes;
 
-        public void Initialize()
-        {
+        public void Initialize() {
             this._world = World.DefaultGameObjectInjectionWorld;
             this._entityManager = this._world.EntityManager;
-            foreach (EArchetype archetype in Enum.GetValues(typeof(EArchetype)))
-            {
+            foreach (EArchetype archetype in Enum.GetValues(typeof(EArchetype))) {
                 this.archetypeDictionary.Add(archetype, CreateArchetype(archetype));
             }
         }
 
-        private EntityArchetype CreateArchetype(EArchetype archetype)
-        {
-            switch (archetype)
-            {
+        private EntityArchetype CreateArchetype(EArchetype archetype) {
+            switch (archetype) {
                 case EArchetype.None:
                     return
                         this._entityManager.CreateArchetype();
@@ -78,20 +70,16 @@ namespace T
             }
         }
 
-        public void Create(EEntities eEntities, EArchetype eArchetype, Mesh[] meshs, UnityEngine.Material[] materials)
-        {
+        public void Create(EEntities eEntities, EArchetype eArchetype, Mesh[] meshs, UnityEngine.Material[] materials) {
             List<Entity> newEntityList = new List<Entity>();
-            if (this._entityDictionary.ContainsKey(eEntities))
-            {
+            if (this._entityDictionary.ContainsKey(eEntities)) {
                 this._entityDictionary[eEntities].Clear();
                 this._entityDictionary.Remove(eEntities);
             }
             this._entityDictionary.Add(eEntities, newEntityList);
 
-            for (int i = 0; i < meshs.Length; i++)
-            {
-                for (int j = 0; j < materials.Length; j++)
-                {
+            for (int i = 0; i < meshs.Length; i++) {
+                for (int j = 0; j < materials.Length; j++) {
                     Entity newEntity = this._entityManager.CreateEntity(this.archetypeDictionary[eArchetype]);
                     this._entityManager.AddSharedComponentData(newEntity, new RenderMesh
                     {

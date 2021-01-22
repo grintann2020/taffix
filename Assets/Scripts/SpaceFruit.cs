@@ -12,7 +12,7 @@ namespace T
     public class SpaceFruit
     {
         public const float HEX_RADIAN = 1.0472f;
-        private Ecs _ecs = null;
+        private ECS _ecs = null;
         private HexagonCalculator hexCalculator = null;
         public Hexagon[,] HexArray = null;
 
@@ -21,7 +21,7 @@ namespace T
 
         }
 
-        public void Bind(Ecs ecs, HexagonCalculator hexCalculator)
+        public void Bind(ECS ecs, HexagonCalculator hexCalculator)
         {
             _ecs = ecs;
             this.hexCalculator = hexCalculator;

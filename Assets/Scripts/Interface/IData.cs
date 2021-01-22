@@ -1,9 +1,7 @@
 using System;
 
-namespace T
-{
-    public interface IData
-    {
+namespace T {
+    public interface IData {
         void Initialize();
     }
 }
