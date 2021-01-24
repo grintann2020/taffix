@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 939886e7b05833446b1a04624870ac80, type: 3}
-  m_Name: BlueSet_0
+  m_Script: {fileID: 11500000, guid: 5a12757a397999442b6d1eb22cac91ea, type: 3}
+  m_Name: Hexagons
   m_EditorClassIdentifier: 
-  EColorSet: 0
-  ColorSOArray: []
+  _sampleArr:
+  - {fileID: 11400000, guid: eda996b1c1738ec48865379c92b009b5, type: 2}
+  - {fileID: 11400000, guid: 9f6612c1a032dc44691e4cad1e4658a8, type: 2}

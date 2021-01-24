@@ -2,17 +2,17 @@
 using UnityEngine;
 
 namespace T {
-    [CreateAssetMenu(fileName = "StyleChartSO", menuName = "ScriptableObject/StyleChartSO", order = 1)]
-    public class StyleChartSO : ScriptableObject, IData {
-        private Dictionary<EStyleScheme, StyleSchemeSO> _schemeDict = new Dictionary<EStyleScheme, StyleSchemeSO>();
-        private Dictionary<EStyleSet, StyleSetSO> _setDict = new Dictionary<EStyleSet, StyleSetSO>();
-        private Dictionary<EStyleSample, StyleSampleSO> _sampleDict = new Dictionary<EStyleSample, StyleSampleSO>();
+    [CreateAssetMenu(fileName = "StylesSO", menuName = "ScriptableObject/StylesSO", order = 1)]
+    public class StylesSO : ScriptableObject, IData {
         public EData EData {
             get { return _eData; }
         }
-        private StyleSchemeSO[] _schemeArr;
         private EData _eData = EData.Style;
-
+        [SerializeField] private StyleSchemeSO[] _schemeArr;
+        private Dictionary<EStyleScheme, StyleSchemeSO> _schemeDict = new Dictionary<EStyleScheme, StyleSchemeSO>();
+        private Dictionary<EStyleSet, StyleSetSO> _setDict = new Dictionary<EStyleSet, StyleSetSO>();
+        private Dictionary<EStyleSample, StyleSampleSO> _sampleDict = new Dictionary<EStyleSample, StyleSampleSO>();
+        
         public void Init() {
             for (int i = 0; i < _schemeArr.Length; i++) {
                 _schemeDict.Add(_schemeArr[i].EStyleScheme, _schemeArr[i]);

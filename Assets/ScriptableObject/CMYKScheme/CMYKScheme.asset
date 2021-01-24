@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83c346d7f4f74744847ba4312f14a4d, type: 3}
+  m_Script: {fileID: 0}
   m_Name: CMYKScheme
   m_EditorClassIdentifier: 
-  EColorScheme: 2
-  ColorSetSOArray: []

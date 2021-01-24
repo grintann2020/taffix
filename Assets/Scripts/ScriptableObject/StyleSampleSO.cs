@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace T {
-    [CreateAssetMenu(fileName = "StyleSO", menuName = "ScriptableObject/StyleSO", order = 1)]
+    [CreateAssetMenu(fileName = "StyleSampleSO", menuName = "ScriptableObject/StyleSampleSO", order = 1)]
     public class StyleSampleSO : ScriptableObject {
         public EStyleScheme EStyleScheme;
         public EStyleSet EStyleSet;

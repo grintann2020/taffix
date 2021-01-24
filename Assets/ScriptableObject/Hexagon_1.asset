@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2abbdb747aa611d4aaca389099b1cad3, type: 3}
-  m_Name: Fuchsia
+  m_Script: {fileID: 11500000, guid: 074c79db2d06907408a2fb69c8ed4b42, type: 3}
+  m_Name: Hexagon_1
   m_EditorClassIdentifier: 
-  eColor: 5
-  color: {r: 1, g: 0, b: 1, a: 1}
+  Mesh: {fileID: 2573148077151847602, guid: 7ef91efad67e0e24a9df519d82720721, type: 3}
+  Material: {fileID: 2100000, guid: a1c085c792c406740ae05d9be33125d6, type: 2}
+  EHexlayer: 1
+  EHexSample: 0

@@ -5,13 +5,13 @@ using UnityEngine;
 namespace T {
     [CreateAssetMenu(fileName = "DataSetSO", menuName = "ScriptableObject/DataSetSO", order = 1)]
     public class DataSetSO : ScriptableObject {
-        public ScriptableObject[] SOArr;
+        public ScriptableObject[] DataSOArr;
         private Dictionary<EData, IData> _dataDict = new Dictionary<EData, IData>();
 
         public void Init() {
-            for (int i = 0; i < SOArr.Length; i++) {
-                ((IData)SOArr[i]).Init();
-                _dataDict.Add(((IData)SOArr[i]).EData, ((IData)SOArr[i]));
+            for (int i = 0; i < DataSOArr.Length; i++) {
+                ((IData)DataSOArr[i]).Init();
+                _dataDict.Add(((IData)DataSOArr[i]).EData, ((IData)DataSOArr[i]));
             }
         }
 
