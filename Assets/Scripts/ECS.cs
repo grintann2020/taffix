@@ -10,17 +10,21 @@ using UnityEngine.Rendering;
 
 namespace T {
     public class ECS {
-        private World _world;
-        private EntityManager _entityManager;
         public EntityManager EntityManager {
             get { return _entityManager; }
         }
-        private Dictionary<EArchetype, EntityArchetype> _archetypeDict = new Dictionary<EArchetype, EntityArchetype>();
-        private Dictionary<EEntities, List<Entity>> _entityDict = new Dictionary<EEntities, List<Entity>>();
-        public Dictionary<EEntities, List<Entity>> EntityDict {
+        public Dictionary<EEntity, Entity> EntityDict {
             get { return _entityDict; }
         }
 
+        private World _world;
+        private EntityManager _entityManager;
+        private Dictionary<EArchetype, EntityArchetype> _archetypeDict = new Dictionary<EArchetype, EntityArchetype>();
+        private Dictionary<EEntity, Entity> _entityDict = new Dictionary<EEntity, Entity>();
+        // private Dictionary<EEntities, List<Entity>> _entityDict = new Dictionary<EEntities, List<Entity>>();
+        // public Dictionary<EEntities, List<Entity>> EntityDict {
+        //     get { return _entityDict; }
+        // }
         private ComponentType[] componentTypes;
 
         public void Init() {
@@ -69,31 +73,47 @@ namespace T {
             }
         }
 
-        public void Create(EEntities eEntities, EArchetype eArchetype, Mesh[] meshs, UnityEngine.Material[] materials) {
-            List<Entity> newEntityList = new List<Entity>();
-            if (_entityDict.ContainsKey(eEntities)) {
-                _entityDict[eEntities].Clear();
-                _entityDict.Remove(eEntities);
-            }
-            _entityDict.Add(eEntities, newEntityList);
-
-            for (int i = 0; i < meshs.Length; i++) {
-                for (int j = 0; j < materials.Length; j++) {
-                    Entity newEntity = _entityManager.CreateEntity(_archetypeDict[eArchetype]);
-                    _entityManager.AddSharedComponentData(newEntity, new RenderMesh
-                    {
-                        mesh = meshs[i],
-                        material = materials[j],
-                        castShadows = ShadowCastingMode.On,
-                        receiveShadows = true
-                    });
-                    _entityManager.SetComponentData(newEntity, new Translation
-                    {
-                        Value = new float3(0.0f, 1000.0f, 0.0f)
-                    });
-                    _entityDict[eEntities].Add(newEntity);
-                }
-            }
+        public void Create(EEntity eEntities, EArchetype eArchetype, Mesh mesh, UnityEngine.Material material) {
+            Entity entity = _entityManager.CreateEntity(_archetypeDict[eArchetype]);
+            _entityManager.AddSharedComponentData(entity, new RenderMesh
+            {
+                mesh = mesh,
+                material = material,
+                // castShadows = ShadowCastingMode.On,
+                // receiveShadows = true
+            });
+            _entityManager.SetComponentData(entity, new Translation
+            {
+                Value = new float3(0.0f, 1000.0f, 0.0f)
+            });
+            // _entityDict[eEntities].Add(entity);
         }
+
+        // public void Create(EEntities eEntities, EArchetype eArchetype, Mesh[] meshs, UnityEngine.Material[] materials) {
+        //     List<Entity> newEntityList = new List<Entity>();
+        //     if (_entityDict.ContainsKey(eEntities)) {
+        //         _entityDict[eEntities].Clear();
+        //         _entityDict.Remove(eEntities);
+        //     }
+        //     _entityDict.Add(eEntities, newEntityList);
+
+        //     for (int i = 0; i < meshs.Length; i++) {
+        //         for (int j = 0; j < materials.Length; j++) {
+        //             Entity newEntity = _entityManager.CreateEntity(_archetypeDict[eArchetype]);
+        //             _entityManager.AddSharedComponentData(newEntity, new RenderMesh
+        //             {
+        //                 mesh = meshs[i],
+        //                 material = materials[j],
+        //                 castShadows = ShadowCastingMode.On,
+        //                 receiveShadows = true
+        //             });
+        //             _entityManager.SetComponentData(newEntity, new Translation
+        //             {
+        //                 Value = new float3(0.0f, 1000.0f, 0.0f)
+        //             });
+        //             _entityDict[eEntities].Add(newEntity);
+        //         }
+        //     }
+        // }
     }
 }

@@ -100,19 +100,19 @@ namespace T {
                         continue;
                     }
                     int indexOfGrid = (row * HexArr.GetLength(1)) + col;
-                    hexArray[indexOfGrid] = _eCS.EntityManager.Instantiate(
-                        _eCS.EntityDict[EEntities.Hexagon_A_01][
-                            UnityEngine.Random.Range(0, _eCS.EntityDict[EEntities.Hexagon_A_01].Count)
-                        ]
-                    );
-                    _eCS.EntityManager.SetComponentData(hexArray[indexOfGrid], new Translation
-                    {
-                        Value = new float3(
-                            HexArr[row, col].X,
-                            HexArr[row, col].Y,
-                            HexArr[row, col].Z
-                        )
-                    });
+                    // hexArray[indexOfGrid] = _eCS.EntityManager.Instantiate(
+                    //     _eCS.EntityDict[EEntity.Hexagon_0][
+                    //         UnityEngine.Random.Range(0, _eCS.EntityDict[EEntity.Hexagon_0].Count)
+                    //     ]
+                    // );
+                    // _eCS.EntityManager.SetComponentData(hexArray[indexOfGrid], new Translation
+                    // {
+                    //     Value = new float3(
+                    //         HexArr[row, col].X,
+                    //         HexArr[row, col].Y,
+                    //         HexArr[row, col].Z
+                    //     )
+                    // });
                 }
             }
             hexArray.Dispose();

@@ -10,11 +10,15 @@ namespace T {
         private EData _eData = EData.Hexagon;
         [SerializeField] private HexagonSampleSO[] _sampleArr;
         private Dictionary<EHexagonSample, HexagonSampleSO> _sampleDict = new Dictionary<EHexagonSample, HexagonSampleSO>();
-        
+
         public void Init() {
             for (int i = 0; i < _sampleArr.Length; i++) {
                 _sampleDict.Add(_sampleArr[i].EHexSample, _sampleArr[i]);
             }
+        }
+
+        public HexagonSampleSO GetSample(EHexagonSample eSample) {
+            return _sampleDict[eSample];
         }
     }
 }

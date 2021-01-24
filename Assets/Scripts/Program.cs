@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace T {
     public class Program : MonoBehaviour {
-        public DataSetSO DataSetSO = null;
-        public Mesh[] hexMeshs = null;
-        public Material[] hexMaterials = null;
+        public DataSetSO DataSet = null;
+        // public Mesh[] hexMeshs = null;
+        // public Material[] hexMaterials = null;
         public ESize size;
         private Control _control = new Control();
         private Space _space = new Space();
         private ECS _eCS = new ECS();
-        private HexagonCalculator hexCalculator = new HexagonCalculator();
+        private HexagonCalculator hexCalc = new HexagonCalculator();
 
         void Start() {
             double a = DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
@@ -24,14 +24,14 @@ namespace T {
         }
 
         public void Init() {
-            DataSetSO.Init();
+            DataSet.Init();
 
             // Debug.Log(colorSchemes[0].colorDictionary[EColor.Red].levels[0].linear);
 
             _eCS.Init();
-            _eCS.Create(EEntities.Hexagon_A_01, EArchetype.Static, hexMeshs, hexMaterials);
+            // _eCS.Create(EEntity.Hexagon_0, EArchetype.Static, DataSet.GetData(EData.Hexagon), hexMaterials);
             _space.Init();
-            _space.Bind(_eCS, hexCalculator);
+            _space.Bind(_eCS, hexCalc);
 
             int[,] testArr = new int[8, 8] {
                 {3, 0, 3, 0, 3, 0, 3, 0},

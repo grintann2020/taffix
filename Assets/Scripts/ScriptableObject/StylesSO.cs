@@ -25,16 +25,16 @@ namespace T {
             }
         }
 
-        public StyleSchemeSO GetStyleScheme(EStyleScheme eStyleScheme) {
-            return _schemeDict[eStyleScheme];
+        public StyleSchemeSO GetScheme(EStyleScheme eScheme) {
+            return _schemeDict[eScheme];
         }
 
-        public StyleSetSO GetStyleSet(EStyleSet eStyleSet) {
-            return _setDict[eStyleSet];
+        public StyleSetSO GetSet(EStyleSet eSet) {
+            return _setDict[eSet];
         }
 
-        public StyleSampleSO GetStyle(EStyleSample eStyle) {
-            return _sampleDict[eStyle];
+        public StyleSampleSO GetSample(EStyleSample eSample) {
+            return _sampleDict[eSample];
         }
     }
 }
