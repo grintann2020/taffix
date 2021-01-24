@@ -1,5 +1,5 @@
 ﻿namespace T {
     public enum ESize {
-        Level01 = 1, Level02, Level03, Level04, Level05, Level06, Level07, Level08, Level09, Level10,
+        Level_0 = 0, Level_1 = 1, Level_2, Level_3, Level_4, Level_5, Level_6, Level_7, Level_8, Level_9, Level_10,
     }
 }

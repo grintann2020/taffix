@@ -13,22 +13,21 @@ namespace T {
         private World _world;
         private EntityManager _entityManager;
         public EntityManager EntityManager {
-            get { return this._entityManager; }
+            get { return _entityManager; }
         }
-        private Dictionary<EArchetype, EntityArchetype> archetypeDictionary = new Dictionary<EArchetype, EntityArchetype>();
-        // private Dictionary<EntityCategory, Entity> entityDictionary = new Dictionary<EntityCategory, Entity>();
-        private Dictionary<EEntities, List<Entity>> _entityDictionary = new Dictionary<EEntities, List<Entity>>();
-        public Dictionary<EEntities, List<Entity>> EntityDictionary {
-            get { return _entityDictionary; }
+        private Dictionary<EArchetype, EntityArchetype> _archetypeDict = new Dictionary<EArchetype, EntityArchetype>();
+        private Dictionary<EEntities, List<Entity>> _entityDict = new Dictionary<EEntities, List<Entity>>();
+        public Dictionary<EEntities, List<Entity>> EntityDict {
+            get { return _entityDict; }
         }
 
         private ComponentType[] componentTypes;
 
-        public void Initialize() {
-            this._world = World.DefaultGameObjectInjectionWorld;
-            this._entityManager = this._world.EntityManager;
+        public void Init() {
+            _world = World.DefaultGameObjectInjectionWorld;
+            _entityManager = _world.EntityManager;
             foreach (EArchetype archetype in Enum.GetValues(typeof(EArchetype))) {
-                this.archetypeDictionary.Add(archetype, CreateArchetype(archetype));
+                _archetypeDict.Add(archetype, CreateArchetype(archetype));
             }
         }
 
@@ -36,10 +35,10 @@ namespace T {
             switch (archetype) {
                 case EArchetype.None:
                     return
-                        this._entityManager.CreateArchetype();
+                        _entityManager.CreateArchetype();
                 case EArchetype.Static:
                     return
-                        this._entityManager.CreateArchetype(
+                        _entityManager.CreateArchetype(
                             typeof(Translation),
                             typeof(RenderMesh),
                             typeof(RenderBounds),
@@ -47,7 +46,7 @@ namespace T {
                         );
                 case EArchetype.Rotatable:
                     return
-                        this._entityManager.CreateArchetype(
+                        _entityManager.CreateArchetype(
                             typeof(Translation),
                             typeof(Rotation),
                             typeof(RenderMesh),
@@ -56,7 +55,7 @@ namespace T {
                         );
                 case EArchetype.Interactable:
                     return
-                        this._entityManager.CreateArchetype(
+                        _entityManager.CreateArchetype(
                             typeof(Translation),
                             typeof(Rotation),
                             typeof(RenderMesh),
@@ -66,33 +65,33 @@ namespace T {
                         );
                 default:
                     return
-                        this._entityManager.CreateArchetype();
+                        _entityManager.CreateArchetype();
             }
         }
 
         public void Create(EEntities eEntities, EArchetype eArchetype, Mesh[] meshs, UnityEngine.Material[] materials) {
             List<Entity> newEntityList = new List<Entity>();
-            if (this._entityDictionary.ContainsKey(eEntities)) {
-                this._entityDictionary[eEntities].Clear();
-                this._entityDictionary.Remove(eEntities);
+            if (_entityDict.ContainsKey(eEntities)) {
+                _entityDict[eEntities].Clear();
+                _entityDict.Remove(eEntities);
             }
-            this._entityDictionary.Add(eEntities, newEntityList);
+            _entityDict.Add(eEntities, newEntityList);
 
             for (int i = 0; i < meshs.Length; i++) {
                 for (int j = 0; j < materials.Length; j++) {
-                    Entity newEntity = this._entityManager.CreateEntity(this.archetypeDictionary[eArchetype]);
-                    this._entityManager.AddSharedComponentData(newEntity, new RenderMesh
+                    Entity newEntity = _entityManager.CreateEntity(_archetypeDict[eArchetype]);
+                    _entityManager.AddSharedComponentData(newEntity, new RenderMesh
                     {
                         mesh = meshs[i],
                         material = materials[j],
                         castShadows = ShadowCastingMode.On,
                         receiveShadows = true
                     });
-                    this._entityManager.SetComponentData(newEntity, new Translation
+                    _entityManager.SetComponentData(newEntity, new Translation
                     {
                         Value = new float3(0.0f, 1000.0f, 0.0f)
                     });
-                    this._entityDictionary[eEntities].Add(newEntity);
+                    _entityDict[eEntities].Add(newEntity);
                 }
             }
         }

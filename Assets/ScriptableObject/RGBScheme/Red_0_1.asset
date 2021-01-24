@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2abbdb747aa611d4aaca389099b1cad3, type: 3}
   m_Name: Red_0_1
   m_EditorClassIdentifier: 
-  eColorScheme: 1
-  eColorSet: 1
-  eColor: 2
-  color: {r: 0.74509805, g: 0, b: 0, a: 0}
-  r: 200
-  g: 0
-  b: 0
-  level: 1
+  EColorScheme: 1
+  EColorSet: 1
+  EColor: 2
+  Color: {r: 1, g: 0, b: 0, a: 0}
+  R: 205
+  G: 0
+  B: 0
+  Level: 1

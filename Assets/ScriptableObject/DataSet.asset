@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d1c7819faa4eb14eabe3da0b024d28e, type: 3}
   m_Name: DataSet
   m_EditorClassIdentifier: 
-  scriptableObjectArray:
-  - {fileID: 11400000, guid: 79302a045567ab9458d85065ae190732, type: 2}
-  - {fileID: 11400000, guid: 79302a045567ab9458d85065ae190732, type: 2}
+  ScriptableObjectArray:
   - {fileID: 11400000, guid: 79302a045567ab9458d85065ae190732, type: 2}

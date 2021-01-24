@@ -1,5 +1,5 @@
 ﻿namespace T {
-    public enum EColor {
+    public enum EStyleSample {
         None,
 
         //----- RGB ----------

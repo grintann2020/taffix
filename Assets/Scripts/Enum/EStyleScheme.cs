@@ -1,12 +1,12 @@
 ﻿namespace T {
-    public enum EColorScheme {
+    public enum EStyleScheme {
         None,
 
         //----- RGB ----------
-        RGBScheme,
+        RGB,
 
         //----- CMYK ----------
-        CMYKScheme,
+        CMYK,
 
     }
 }

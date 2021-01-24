@@ -34,19 +34,27 @@
         }
 
         public float HorizontalDistance(float size) {
-            return UnitWidth(size) * 2;
+            return UnitWidth(HexagonWidth(size)) * 2;
         }
 
         public float VerticalDistance(float size) {
-            return UnitHeight(size) * 3;
+            return UnitHeight(HexagonHeight(size)) * 3;
         }
 
-        public float UnitWidth(float size) {
-            return (size * ASPECT_RATIO) / 2;
+        public float UnitWidth(float hexagonWidth) {
+            return hexagonWidth / 2;
         }
 
-        public float UnitHeight(float size) {
-            return (size * 2) / 4;
+        public float UnitHeight(float hexagonHeight) {
+            return hexagonHeight / 4;
+        }
+
+        public float HexagonWidth(float size) {
+            return size * ASPECT_RATIO;
+        }
+
+        public float HexagonHeight(float size) {
+            return size * 2;
         }
 
         public Coord CenterPosition(int horizontalUnits, int verticalUnits, float horizontalUnitSpacing, float verticalUnitSpacing) {

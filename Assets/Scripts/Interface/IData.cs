@@ -2,6 +2,7 @@ using System;
 
 namespace T {
     public interface IData {
-        void Initialize();
+        EData EData { get; }
+        void Init();
     }
 }

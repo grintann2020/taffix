@@ -10,10 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 939886e7b05833446b1a04624870ac80, type: 3}
-  m_Name: Blue_0
+  m_Name: BlueSet_0
   m_EditorClassIdentifier: 
-  eColorSet: 3
-  colorSOs:
-  - {fileID: 11400000, guid: a805ba6b465d46f4fa5c7686cda9e838, type: 2}
-  - {fileID: 11400000, guid: ff2a2edaf50bfe94b96d57cff5334836, type: 2}
-  - {fileID: 11400000, guid: 0149b6a66afcafb45b04ce3888c4b6a8, type: 2}
+  EColorSet: 0
+  ColorSOArray: []

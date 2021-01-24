@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b83c346d7f4f74744847ba4312f14a4d, type: 3}
   m_Name: RGBScheme
   m_EditorClassIdentifier: 
-  eColorScheme: 1
-  colorSetSOs:
+  EColorScheme: 1
+  ColorSetSOArray:
   - {fileID: 11400000, guid: dcc027f15ee470c43966c0afa084cb12, type: 2}
   - {fileID: 11400000, guid: 7755116f2ade7d349a7dba457f3d332c, type: 2}
   - {fileID: 11400000, guid: 5a5a1ea41edf86b48bc293cadb665ac3, type: 2}

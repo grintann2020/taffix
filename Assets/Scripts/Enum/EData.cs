@@ -1,6 +1,6 @@
 ﻿namespace T {
     public enum EData {
-        Color,
-
+        Style,
+        Hexagon
     }
 }
