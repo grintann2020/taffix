@@ -1,7 +1,7 @@
 namespace T {
     public enum EHexagonLayer {
-        Background,
+        Base,
         Interactive,
-        
+        Cover
     }
 }

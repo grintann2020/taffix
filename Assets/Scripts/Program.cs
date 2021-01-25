@@ -29,7 +29,12 @@ namespace T {
             // Debug.Log(colorSchemes[0].colorDictionary[EColor.Red].levels[0].linear);
 
             _eCS.Init();
-            // _eCS.Create(EEntity.Hexagon_0, EArchetype.Static, DataSet.GetData(EData.Hexagon), hexMaterials);
+            _eCS.Create(
+                EEntity.Hexagon_0,
+                EArchetype.Static,
+                ((HexagonsSO)DataSet.GetData(EData.Hexagon)).GetSample(EHexagonSample.Interactable).Mesh,
+                ((HexagonsSO)DataSet.GetData(EData.Hexagon)).GetSample(EHexagonSample.Interactable).Material
+            );
             _space.Init();
             _space.Bind(_eCS, hexCalc);
 

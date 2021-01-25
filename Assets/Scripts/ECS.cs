@@ -73,7 +73,10 @@ namespace T {
             }
         }
 
-        public void Create(EEntity eEntities, EArchetype eArchetype, Mesh mesh, UnityEngine.Material material) {
+        public void Create(EEntity eEntity, EArchetype eArchetype, Mesh mesh, UnityEngine.Material material) {
+            if (_entityDict.ContainsKey(eEntity)) {
+                _entityDict.Remove(eEntity);
+            }
             Entity entity = _entityManager.CreateEntity(_archetypeDict[eArchetype]);
             _entityManager.AddSharedComponentData(entity, new RenderMesh
             {
@@ -86,16 +89,16 @@ namespace T {
             {
                 Value = new float3(0.0f, 1000.0f, 0.0f)
             });
-            // _entityDict[eEntities].Add(entity);
+            _entityDict.Add(eEntity, entity);
         }
 
-        // public void Create(EEntities eEntities, EArchetype eArchetype, Mesh[] meshs, UnityEngine.Material[] materials) {
+        // public void Create(EEntities eEntity, EArchetype eArchetype, Mesh[] meshs, UnityEngine.Material[] materials) {
         //     List<Entity> newEntityList = new List<Entity>();
-        //     if (_entityDict.ContainsKey(eEntities)) {
-        //         _entityDict[eEntities].Clear();
-        //         _entityDict.Remove(eEntities);
+        //     if (_entityDict.ContainsKey(eEntity)) {
+        //         _entityDict[eEntity].Clear();
+        //         _entityDict.Remove(eEntity);
         //     }
-        //     _entityDict.Add(eEntities, newEntityList);
+        //     _entityDict.Add(eEntity, newEntityList);
 
         //     for (int i = 0; i < meshs.Length; i++) {
         //         for (int j = 0; j < materials.Length; j++) {
@@ -111,7 +114,7 @@ namespace T {
         //             {
         //                 Value = new float3(0.0f, 1000.0f, 0.0f)
         //             });
-        //             _entityDict[eEntities].Add(newEntity);
+        //             _entityDict[eEntity].Add(newEntity);
         //         }
         //     }
         // }
