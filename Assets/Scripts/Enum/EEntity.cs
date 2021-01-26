@@ -1,5 +1,5 @@
 ﻿namespace T {
     public enum EEntity {
-        Hexagon_0,
+        Hex_0,
     }
 }

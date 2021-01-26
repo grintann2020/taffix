@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d1c7819faa4eb14eabe3da0b024d28e, type: 3}
-  m_Name: DataSet
+  m_Script: {fileID: 11500000, guid: 9113b259387325b4395b9e7f2dc37c67, type: 3}
+  m_Name: CMYK
   m_EditorClassIdentifier: 
-  DataSOArr:
-  - {fileID: 11400000, guid: f090a10c449b67a4494e90a988496567, type: 2}
-  - {fileID: 11400000, guid: e4cd25c64aee0d9469367f90965dacca, type: 2}
+  EStyleScheme: 2
+  _setArr: []

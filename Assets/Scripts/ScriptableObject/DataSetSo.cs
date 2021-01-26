@@ -9,9 +9,11 @@ namespace T {
         private Dictionary<EData, IData> _dataDict = new Dictionary<EData, IData>();
 
         public void Init() {
-            for (int i = 0; i < DataSOArr.Length; i++) {
-                ((IData)DataSOArr[i]).Init();
-                _dataDict.Add(((IData)DataSOArr[i]).EData, ((IData)DataSOArr[i]));
+            if (DataSOArr.Length != 0) {
+                for (int i = 0; i < DataSOArr.Length; i++) {
+                    ((IData)DataSOArr[i]).Init();
+                    _dataDict.Add(((IData)DataSOArr[i]).EData, ((IData)DataSOArr[i]));
+                }
             }
         }
 

@@ -11,81 +11,81 @@ namespace T {
     public class Space {
         // public const float HEX_RADIAN = 1.0472f;
         private ECS _eCS = null;
-        private HexagonCalculator _hexCalc = null;
-        public Hexagon[,] HexArr = null;
+        private HexCalc _hexCalc = null;
+        public Hex[,] HexArr = null;
 
         public void Init() {
 
         }
 
-        public void Bind(ECS eCS, HexagonCalculator hexCalc) {
+        public void Bind(ECS eCS, HexCalc hexCalc) {
             _eCS = eCS;
             _hexCalc = hexCalc;
         }
 
-        // public void Create(int colsLength, int rowsLength, Size size)
+        // public void Create(int cols, int rows, Size size)
         public void Construct(int[,] hexData, ESize size) {
-            int rowsLength = hexData.GetLength(0);
-            int colsLength = hexData.GetLength(1);
-            HexArr = new Hexagon[rowsLength, colsLength];
+            int rows = hexData.GetLength(0);
+            int cols = hexData.GetLength(1);
+            HexArr = new Hex[rows, cols];
             // float size = 1.0f;
             // float unitWidth = (HEXSCALE * size) / 2;
             // float unitHeight = (2 * size) / 4;
             // float rowSpacing = unitWidth * 2;
             // float colSpacing = unitHeight * 3;
-            (float colSpacing, float rowSpacing) = _hexCalc.DistributionDistance((float)size);
-            Coord startingPosition = _hexCalc.CenterPosition(colsLength, rowsLength, colSpacing, rowSpacing);
-            for (int row = 0; row < rowsLength; row++) {
-                for (int col = 0; col < colsLength; col++) {
+            (float colSpacing, float rowSpacing) = _hexCalc.DistributeDist((float)size);
+            Coord startPos = _hexCalc.CenterPos(cols, rows, colSpacing, rowSpacing);
+            for (int row = 0; row < rows; row++) {
+                for (int col = 0; col < cols; col++) {
                     if (hexData[row, col] == -1) {
                         HexArr[row, col] = null;
                     } else {
-                        float x = startingPosition.X + col * colSpacing;
-                        float y = startingPosition.Y;// + (float)hexData[row, col];
-                        float z = startingPosition.Z - row * rowSpacing;
+                        float x = startPos.X + col * colSpacing;
+                        float y = startPos.Y;// + (float)hexData[row, col];
+                        float z = startPos.Z - row * rowSpacing;
                         // x += this.hexCalc.UnitWidth((float)size) * (row & 1);
                         if (row % 2 != 0) {
-                            x += _hexCalc.UnitWidth(_hexCalc.HexagonWidth((float)size));
+                            x += _hexCalc.UnitW(_hexCalc.HexW((float)size));
                         }
-                        HexArr[row, col] = new Hexagon(new Grid(row, col), new Coord(x, y, z));
+                        HexArr[row, col] = new Hex(new Grid(row, col), new Coord(x, y, z));
                     }
                 }
             }
 
-            for (int row = 0; row < rowsLength; row++) {
-                for (int col = 0; col < colsLength; col++) {
+            for (int row = 0; row < rows; row++) {
+                for (int col = 0; col < cols; col++) {
                     if (HexArr[row, col] == null) {
                         continue;
                     }
 
-                    if (col < colsLength - 1) {
-                        int[] direct = _hexCalc.Adjacency(row, (int)EHexagonDirection.East);
-                        HexArr[row, col].East = HexArr[row + direct[0], col + direct[1]];
+                    if (col < cols - 1) {
+                        int[] dir = _hexCalc.Adjacency(row, (int)EHexDir.E);
+                        HexArr[row, col].E = HexArr[row + dir[0], col + dir[1]];
                     }
 
-                    if (row > 0 && col < colsLength - 1) {
-                        int[] direct = _hexCalc.Adjacency(row, (int)EHexagonDirection.NorthEast);
-                        HexArr[row, col].NorthEast = HexArr[row + direct[0], col + direct[1]];
+                    if (row > 0 && col < cols - 1) {
+                        int[] dir = _hexCalc.Adjacency(row, (int)EHexDir.NE);
+                        HexArr[row, col].NE = HexArr[row + dir[0], col + dir[1]];
                     }
 
                     if (row > 0 && col > 0) {
-                        int[] direct = _hexCalc.Adjacency(row, (int)EHexagonDirection.NorthWest);
-                        HexArr[row, col].NorthWest = HexArr[row + direct[0], col + direct[1]];
+                        int[] dir = _hexCalc.Adjacency(row, (int)EHexDir.NW);
+                        HexArr[row, col].NW = HexArr[row + dir[0], col + dir[1]];
                     }
 
                     if (col > 0) {
-                        int[] direct = _hexCalc.Adjacency(row, (int)EHexagonDirection.West);
-                        HexArr[row, col].West = HexArr[row + direct[0], col + direct[1]];
+                        int[] dir = _hexCalc.Adjacency(row, (int)EHexDir.W);
+                        HexArr[row, col].W = HexArr[row + dir[0], col + dir[1]];
                     }
 
-                    if (row < rowsLength - 1 && col > 0) {
-                        int[] direct = _hexCalc.Adjacency(row, (int)EHexagonDirection.SouthWest);
-                        HexArr[row, col].SouthWest = HexArr[row + direct[0], col + direct[1]];
+                    if (row < rows - 1 && col > 0) {
+                        int[] dir = _hexCalc.Adjacency(row, (int)EHexDir.SW);
+                        HexArr[row, col].SW = HexArr[row + dir[0], col + dir[1]];
                     }
 
-                    if (row < rowsLength - 1 && col < colsLength - 1) {
-                        int[] direct = _hexCalc.Adjacency(row, (int)EHexagonDirection.SouthEast);
-                        HexArr[row, col].SouthEast = HexArr[row + direct[0], col + direct[1]];
+                    if (row < rows - 1 && col < cols - 1) {
+                        int[] dir = _hexCalc.Adjacency(row, (int)EHexDir.SE);
+                        HexArr[row, col].SE = HexArr[row + dir[0], col + dir[1]];
                     }
                 }
             }
@@ -101,9 +101,9 @@ namespace T {
                     }
                     int indexOfGrid = (row * HexArr.GetLength(1)) + col;
                     entityArr[indexOfGrid] = _eCS.EntityManager.Instantiate(
-                        _eCS.EntityDict[EEntity.Hexagon_0]
-                        // _eCS.EntityDict[EEntity.Hexagon_0][
-                        //     UnityEngine.Random.Range(0, _eCS.EntityDict[EEntity.Hexagon_0].Count)
+                        _eCS.EntityDict[EEntity.Hex_0]
+                        // _eCS.EntityDict[EEntity.Hex_0][
+                        //     UnityEngine.Random.Range(0, _eCS.EntityDict[EEntity.Hex_0].Count)
                         // ]
                     );
                     _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new Translation
