@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: CMYK
   m_EditorClassIdentifier: 
   EStyleScheme: 2
-  _setArr: []
+  _setArr:
+  - {fileID: 11400000, guid: c238f6b4e2a734641b73cb74a9b98dae, type: 2}
+  - {fileID: 11400000, guid: 03212b194e0ce814997b9077749dfeea, type: 2}
+  - {fileID: 11400000, guid: 1e0b05fb179db15438b9e8eef9a50b43, type: 2}
+  - {fileID: 11400000, guid: 5603cb511e0dbbb4cbf63b42bed32003, type: 2}

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75562ce404ca9b64fb817ecbd0b4131e, type: 3}
   m_Name: HexData
   m_EditorClassIdentifier: 
-  _itemArr: []
+  _itemArr:
+  - {fileID: 11400000, guid: 99dad8105cd66694a9dc040d5e15a841, type: 2}

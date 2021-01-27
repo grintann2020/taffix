@@ -15,5 +15,5 @@ MonoBehaviour:
   EStyleScheme: 1
   _setArr:
   - {fileID: 11400000, guid: 65c3bfc2c24c76d4a9b62d54941f9aa4, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 5dc826781dfbbf348896d8bc206ceeb7, type: 2}
+  - {fileID: 11400000, guid: afc388291e28f4649b711d96e09f27b0, type: 2}

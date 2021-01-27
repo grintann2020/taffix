@@ -102,9 +102,9 @@ namespace T {
                     int indexOfGrid = (row * HexArr.GetLength(1)) + col;
                     entityArr[indexOfGrid] = _eCS.EntityManager.Instantiate(
                         _eCS.EntityDict[EEntity.Hex_0]
-                        // _eCS.EntityDict[EEntity.Hex_0][
-                        //     UnityEngine.Random.Range(0, _eCS.EntityDict[EEntity.Hex_0].Count)
-                        // ]
+                    // _eCS.EntityDict[EEntity.Hex_0][
+                    //     UnityEngine.Random.Range(0, _eCS.EntityDict[EEntity.Hex_0].Count)
+                    // ]
                     );
                     _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new Translation
                     {
@@ -114,6 +114,10 @@ namespace T {
                             HexArr[row, col].Z
                         )
                     });
+                    // _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new MaterialColor
+                    // {
+                    //     Value = new float4(255.0f, 1.0f, 0.3f, 255.0f)
+                    // });
                 }
             }
             entityArr.Dispose();

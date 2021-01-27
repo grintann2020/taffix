@@ -9,14 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2abbdb747aa611d4aaca389099b1cad3, type: 3}
-  m_Name: Cyan_0_0
+  m_Script: {fileID: 11500000, guid: 8eb6da677e327694d83f2df498932cbc, type: 3}
+  m_Name: Black_0
   m_EditorClassIdentifier: 
-  eColorScheme: 2
-  eColorSet: 4
-  eColor: 10
-  color: {r: 0, g: 0.9411765, b: 0.9411765, a: 0}
-  r: 0
-  g: 240
-  b: 240
-  level: 0
+  EStyleSet: 7
+  _itemArr: []
