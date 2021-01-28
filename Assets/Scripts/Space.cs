@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Rendering;
@@ -114,10 +115,12 @@ namespace T {
                             HexArr[row, col].Z
                         )
                     });
-                    // _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new MaterialColor
-                    // {
-                    //     Value = new float4(255.0f, 1.0f, 0.3f, 255.0f)
-                    // });
+                    _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new MaterialColor
+                    {
+                        Value = new float4(0.0f, 0.0f, 1000.0f, 1.0f)
+                        
+                    });
+                    Debug.Log("MaterialColor");
                 }
             }
             entityArr.Dispose();

@@ -85,14 +85,14 @@ namespace T {
                 // castShadows = ShadowCastingMode.On,
                 // receiveShadows = true
             });
-            // _entityManager.AddComponentData(entity, new MaterialColor
-            // {
-            //     Value = new float4(0.0f, 7.0f, 0.0f, 1.0f)
-            // });
-            _entityManager.AddComponentData(entity, new URPMaterialPropertyBaseColor
+            _entityManager.AddComponentData(entity, new MaterialColor
             {
-
+                Value = new float4(0.0f, 0.0f, 0.0f, 1.0f)
             });
+            // _entityManager.AddComponentData(entity, new URPMaterialPropertyBaseColor
+            // {
+
+            // });
             _entityManager.SetComponentData(entity, new Translation
             {
                 Value = new float3(0.0f, 1000.0f, 0.0f)
