@@ -115,12 +115,17 @@ namespace T {
                             HexArr[row, col].Z
                         )
                     });
-                    _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new MaterialColor
+                    _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new MyOwnColor
                     {
-                        Value = new float4(0.0f, 0.0f, 1000.0f, 1.0f)
+                        Value = new float4(0.0f, row * 0.2f, col * 0.1f, col * 0.001f)
                         
                     });
-                    Debug.Log("MaterialColor");
+                    // _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new MaterialColor
+                    // {
+                    //     Value = new float4(0.0f, row * 0.2f, col * 0.1f, 0.5f)
+                        
+                    // });
+                    // Debug.Log("MaterialColor");
                 }
             }
             entityArr.Dispose();
