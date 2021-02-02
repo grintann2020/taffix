@@ -10,15 +10,17 @@ using UnityEngine.Rendering;
 
 namespace T {
     public class ECS {
-        public EntityManager EntityManager {
-            get { return _entityManager; }
+        public EntityManager EntityMgr {
+            get { return _entityMgr; }
         }
         public Dictionary<EEntity, Entity> EntityDict {
             get { return _entityDict; }
         }
-
+        public World World {
+            get { return _world; }
+        }
         private World _world;
-        private EntityManager _entityManager;
+        private EntityManager _entityMgr;
         private Dictionary<EArchetype, EntityArchetype> _archetypeDict = new Dictionary<EArchetype, EntityArchetype>();
         private Dictionary<EEntity, Entity> _entityDict = new Dictionary<EEntity, Entity>();
         // private Dictionary<EEntities, List<Entity>> _entityDict = new Dictionary<EEntities, List<Entity>>();
@@ -29,7 +31,7 @@ namespace T {
 
         public void Init() {
             _world = World.DefaultGameObjectInjectionWorld;
-            _entityManager = _world.EntityManager;
+            _entityMgr = _world.EntityManager;
             foreach (EArchetype archetype in Enum.GetValues(typeof(EArchetype))) {
                 _archetypeDict.Add(archetype, CreateArchetype(archetype));
             }
@@ -39,10 +41,10 @@ namespace T {
             switch (archetype) {
                 case EArchetype.None:
                     return
-                        _entityManager.CreateArchetype();
+                        _entityMgr.CreateArchetype();
                 case EArchetype.Static:
                     return
-                        _entityManager.CreateArchetype(
+                        _entityMgr.CreateArchetype(
                             typeof(Translation),
                             typeof(RenderMesh),
                             typeof(RenderBounds),
@@ -50,7 +52,7 @@ namespace T {
                         );
                 case EArchetype.Rotatable:
                     return
-                        _entityManager.CreateArchetype(
+                        _entityMgr.CreateArchetype(
                             typeof(Translation),
                             typeof(Rotation),
                             typeof(RenderMesh),
@@ -59,7 +61,7 @@ namespace T {
                         );
                 case EArchetype.Interactable:
                     return
-                        _entityManager.CreateArchetype(
+                        _entityMgr.CreateArchetype(
                             typeof(Translation),
                             typeof(Rotation),
                             typeof(RenderMesh),
@@ -69,7 +71,7 @@ namespace T {
                         );
                 default:
                     return
-                        _entityManager.CreateArchetype();
+                        _entityMgr.CreateArchetype();
             }
         }
 
@@ -77,33 +79,33 @@ namespace T {
             if (_entityDict.ContainsKey(eEntity)) {
                 _entityDict.Remove(eEntity);
             }
-            Entity entity = _entityManager.CreateEntity(_archetypeDict[eArchetype]);
-            _entityManager.AddSharedComponentData(entity, new RenderMesh
+            Entity entity = _entityMgr.CreateEntity(_archetypeDict[eArchetype]);
+            _entityMgr.AddSharedComponentData(entity, new RenderMesh
             {
                 mesh = mesh,
                 material = material,
                 castShadows = ShadowCastingMode.On,
                 receiveShadows = true
             });
-            // _entityManager.AddComponentData(entity, new MaterialColor
+            // _entityMgr.AddComponentData(entity, new MaterialColor
             // {
             //     Value = new float4(0.0f, 0.0f, 0.0f, 0.0f)
             // });
-            // _entityManager.AddComponentData(entity, new MaterialColor
-            // {
-            //     Value = new float4(0.0f, 0.0f, 0.0f, 0.0f)
-            // });
-            _entityManager.AddComponentData(entity, new MyOwnColor
+            _entityMgr.AddComponentData(entity, new MyOwnColor
             {
                 Value = new float4(0.0f, 0.0f, 0.0f, 0.0f)
             });
-            _entityManager.AddComponentData(entity, new MyTime
+            _entityMgr.AddComponentData(entity, new MyTime
             {
                 tt = 0.1f
             });
-            _entityManager.SetComponentData(entity, new Translation
+            _entityMgr.SetComponentData(entity, new Translation
             {
                 Value = new float3(0.0f, 1000.0f, 0.0f)
+            });
+            _entityMgr.SetComponentData(entity, new PhysicsCollider
+            {
+                // Value = new float3(0.0f, 1000.0f, 0.0f)
             });
 
             _entityDict.Add(eEntity, entity);
@@ -119,15 +121,15 @@ namespace T {
 
         //     for (int i = 0; i < meshs.Length; i++) {
         //         for (int j = 0; j < materials.Length; j++) {
-        //             Entity newEntity = _entityManager.CreateEntity(_archetypeDict[eArchetype]);
-        //             _entityManager.AddSharedComponentData(newEntity, new RenderMesh
+        //             Entity newEntity = _entityMgr.CreateEntity(_archetypeDict[eArchetype]);
+        //             _entityMgr.AddSharedComponentData(newEntity, new RenderMesh
         //             {
         //                 mesh = meshs[i],
         //                 material = materials[j],
         //                 castShadows = ShadowCastingMode.On,
         //                 receiveShadows = true
         //             });
-        //             _entityManager.SetComponentData(newEntity, new Translation
+        //             _entityMgr.SetComponentData(newEntity, new Translation
         //             {
         //                 Value = new float3(0.0f, 1000.0f, 0.0f)
         //             });

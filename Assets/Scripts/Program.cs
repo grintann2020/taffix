@@ -4,13 +4,12 @@ using UnityEngine;
 namespace T {
     public class Program : MonoBehaviour {
         public DataSetSO DataSet = null;
-        // public Mesh[] hexMeshs = null;
-        // public Material[] hexMaterials = null;
         public ESize size;
-        private Control _control = new Control();
+        private Camera _cam;
+        private Control _ctrl = new Control();
         private Space _space = new Space();
-        private ECS _eCS = new ECS();
-        private HexCalc hexCalc = new HexCalc();
+        private ECS _ecs = new ECS();
+        private HexCalc _hexCalc = new HexCalc();
 
         void Start() {
             double a = DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
@@ -20,23 +19,27 @@ namespace T {
         }
 
         void Update() {
-
+            _ctrl.InvokeUpdate();
         }
 
         public void Init() {
+            _cam = Camera.main;
             DataSet.Init();
+            
 
             // Debug.Log(colorSchemes[0].colorDictionary[EColor.Red].levels[0].linear);
 
-            _eCS.Init();
-            _eCS.Create(
+            _ecs.Init();
+            _ecs.Create(
                 EEntity.Hex_0,
                 EArchetype.Static,
                 ((HexDataSO)DataSet.GetData(EData.Hex)).GetItem(EHexItem.Interactable).Mesh,
                 ((HexDataSO)DataSet.GetData(EData.Hex)).GetItem(EHexItem.Interactable).Material
             );
             _space.Init();
-            _space.Bind(_eCS, hexCalc);
+            _space.Bind(_ecs, _hexCalc);
+
+            _ctrl.Init(_cam, _ecs);
 
             int[,] testArr = new int[8, 8] {
                 {3, 0, 3, 0, 3, 0, 3, 0},

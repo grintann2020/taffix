@@ -11,16 +11,16 @@ using Unity.Collections;
 namespace T {
     public class Space {
         // public const float HEX_RADIAN = 1.0472f;
-        private ECS _eCS = null;
-        private HexCalc _hexCalc = null;
         public Hex[,] HexArr = null;
-
+        private ECS _ecs = null;
+        private HexCalc _hexCalc = null;
+        
         public void Init() {
 
         }
 
         public void Bind(ECS eCS, HexCalc hexCalc) {
-            _eCS = eCS;
+            _ecs = eCS;
             _hexCalc = hexCalc;
         }
 
@@ -101,13 +101,13 @@ namespace T {
                         continue;
                     }
                     int indexOfGrid = (row * HexArr.GetLength(1)) + col;
-                    entityArr[indexOfGrid] = _eCS.EntityManager.Instantiate(
-                        _eCS.EntityDict[EEntity.Hex_0]
-                    // _eCS.EntityDict[EEntity.Hex_0][
-                    //     UnityEngine.Random.Range(0, _eCS.EntityDict[EEntity.Hex_0].Count)
+                    entityArr[indexOfGrid] = _ecs.EntityMgr.Instantiate(
+                        _ecs.EntityDict[EEntity.Hex_0]
+                    // _ecs.EntityDict[EEntity.Hex_0][
+                    //     UnityEngine.Random.Range(0, _ecs.EntityDict[EEntity.Hex_0].Count)
                     // ]
                     );
-                    _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new Translation
+                    _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new Translation
                     {
                         Value = new float3(
                             HexArr[row, col].X,
@@ -115,15 +115,15 @@ namespace T {
                             HexArr[row, col].Z
                         )
                     });
-                    _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new MyOwnColor
+                    _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new MyOwnColor
                     {
                         Value = new float4(0.0f, row * 0.2f, col * 0.1f, col * 0.001f)
-                        
+
                     });
-                    // _eCS.EntityManager.SetComponentData(entityArr[indexOfGrid], new MaterialColor
+                    // _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new MaterialColor
                     // {
                     //     Value = new float4(0.0f, row * 0.2f, col * 0.1f, 0.5f)
-                        
+
                     // });
                     // Debug.Log("MaterialColor");
                 }
