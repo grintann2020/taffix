@@ -48,7 +48,8 @@ namespace T {
                             typeof(Translation),
                             typeof(RenderMesh),
                             typeof(RenderBounds),
-                            typeof(LocalToWorld)
+                            typeof(LocalToWorld),
+                            typeof(PhysicsCollider)
                         );
                 case EArchetype.Rotatable:
                     return
@@ -57,7 +58,8 @@ namespace T {
                             typeof(Rotation),
                             typeof(RenderMesh),
                             typeof(RenderBounds),
-                            typeof(LocalToWorld)
+                            typeof(LocalToWorld),
+                            typeof(PhysicsCollider)
                         );
                 case EArchetype.Interactable:
                     return
@@ -87,10 +89,6 @@ namespace T {
                 castShadows = ShadowCastingMode.On,
                 receiveShadows = true
             });
-            // _entityMgr.AddComponentData(entity, new MaterialColor
-            // {
-            //     Value = new float4(0.0f, 0.0f, 0.0f, 0.0f)
-            // });
             _entityMgr.AddComponentData(entity, new MyOwnColor
             {
                 Value = new float4(0.0f, 0.0f, 0.0f, 0.0f)
@@ -99,14 +97,19 @@ namespace T {
             {
                 tt = 0.1f
             });
+            // _entityMgr.AddComponentData(entity, new PhysicsCollider
+            // {
+
+            // });
             _entityMgr.SetComponentData(entity, new Translation
             {
                 Value = new float3(0.0f, 1000.0f, 0.0f)
             });
-            _entityMgr.SetComponentData(entity, new PhysicsCollider
-            {
-                // Value = new float3(0.0f, 1000.0f, 0.0f)
-            });
+            // _entityMgr.AddComponentData(entity, new MaterialColor
+            // {
+            //     Value = new float4(0.0f, 0.0f, 0.0f, 0.0f)
+            // });
+            
 
             _entityDict.Add(eEntity, entity);
         }

@@ -41,7 +41,7 @@ namespace T {
 
             _ctrl.Init(_cam, _ecs);
 
-            int[,] testArr = new int[8, 8] {
+            int[,] testArr = new int[9, 8] {
                 {3, 0, 3, 0, 3, 0, 3, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 1},
@@ -49,6 +49,7 @@ namespace T {
                 {0, 0, 0, 0, 0, 2, 0, 1},
                 {3, 0, 1, 2, 3, 1, 3, 2},
                 {0, 0, 0, 0, 0, 0, 2, 0},
+                {0, 0, 2, 0, 0, 0, 0, 1},
                 {0, 0, 2, 0, 0, 0, 0, 1}
             };
 
@@ -103,7 +104,7 @@ namespace T {
                 {0, 0, 0, 0, 0},
             };
 
-            _space.Construct(testArr1, size);
+            _space.Construct(testArr, size);
             Excute();
         }
 
