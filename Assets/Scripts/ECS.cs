@@ -131,8 +131,23 @@ namespace T {
                 CollisionFilter.Default
             );
 
-            vertexBuffer.Dispose();
-            triangleBuffer.Dispose();
+            CylinderGeometry cylinderGeometry = new CylinderGeometry();
+            cylinderGeometry.Center = new float3(0.0f, 0.0f, 0.0f);
+            // quaternion quat = new quaternion();
+            // quat.RotateX(-90);
+
+            cylinderGeometry.Orientation = quaternion.RotateX(-90);
+            cylinderGeometry.Height = 0.1f;
+            cylinderGeometry.Radius = 1.0f;
+            cylinderGeometry.BevelRadius = 0.0f;
+            cylinderGeometry.SideCount = 6;
+
+            BlobAssetReference<Unity.Physics.Collider> collider3 = Unity.Physics.CylinderCollider.Create(
+                cylinderGeometry,
+                CollisionFilter.Default
+            );
+
+            
 
             _entityMgr.AddComponentData(entity, new PhysicsCollider
             {
@@ -150,6 +165,8 @@ namespace T {
             //     Value = new float4(0.0f, 0.0f, 0.0f, 0.0f)
             // });
 
+            vertexBuffer.Dispose();
+            triangleBuffer.Dispose();
 
             _entityDict.Add(eEntity, entity);
         }
