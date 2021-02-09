@@ -15,7 +15,7 @@ namespace T {
         public Hex[,] HexArr = null;
         private ECS _ecs = null;
         private HexCalc _hexCalc = null;
-        // [ReadOnly, NativeDisableParallelForRestriction] NativeArray<Entity> entityArr;
+        // [WriteOnly, NativeDisableParallelForRestriction] NativeArray<Entity> entityArr;
         // [NativeDisableContainerSafetyRestriction] NativeArray<Entity> entityArr;
 
         public void Init() {
@@ -94,9 +94,7 @@ namespace T {
                 }
             }
         }
-
-        public void Instantiate() {
-            // entityArr = new NativeArray<Entity>(HexArr.Length + 100, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);
+        public void Instantiate2(Entity hex) {
             NativeArray<Entity> entityArr = new NativeArray<Entity>(HexArr.Length, Allocator.TempJob);
 
             for (int row = 0; row < HexArr.GetLength(0); row++) {
@@ -105,8 +103,47 @@ namespace T {
                         continue;
                     }
                     int indexOfGrid = (row * HexArr.GetLength(1)) + col;
-                    Debug.Log(indexOfGrid);
+                    // Debug.Log(indexOfGrid);
 
+                    entityArr[indexOfGrid] = _ecs.EntityMgr.Instantiate(hex);
+                    _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new Translation
+                    {
+                        Value = new float3(
+                            HexArr[row, col].X,
+                            HexArr[row, col].Y,
+                            HexArr[row, col].Z
+                        )
+                    });
+                    // _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new MyOwnColor
+                    // {
+                    //     Value = new float4(0.0f, row * 0.2f, col * 0.1f, col * 0.001f)
+
+                    // });
+
+                    // _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new PhysicsCollider
+                    // {
+                    // });
+                    // _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new MaterialColor
+                    // {
+                    //     Value = new float4(0.0f, row * 0.2f, col * 0.1f, 0.5f)
+
+                    // });
+                    // Debug.Log("MaterialColor");
+                }
+            }
+            entityArr.Dispose();
+        }
+        public void Instantiate() {
+            // entityArr = new NativeArray<Entity>(HexArr.Length, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);
+            // NativeArray<Entity> entityArr = new NativeArray<Entity>(HexArr.Length, Allocator.TempJob);
+            Entity[] entityArr = new Entity[HexArr.Length];
+            for (int row = 0; row < HexArr.GetLength(0); row++) {
+                for (int col = 0; col < HexArr.GetLength(1); col++) {
+                    if (HexArr[row, col] == null) {
+                        continue;
+                    }
+                    int indexOfGrid = (row * HexArr.GetLength(1)) + col;
+                    // Debug.Log(indexOfGrid);
                     entityArr[indexOfGrid] = _ecs.EntityMgr.Instantiate(
                         _ecs.EntityDict[EEntity.Hex_0]
                     // _ecs.EntityDict[EEntity.Hex_0][
@@ -124,9 +161,7 @@ namespace T {
                     _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new MyOwnColor
                     {
                         Value = new float4(0.0f, row * 0.2f, col * 0.1f, col * 0.001f)
-
                     });
-
                     // _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new PhysicsCollider
                     // {
                     // });
@@ -138,7 +173,7 @@ namespace T {
                     // Debug.Log("MaterialColor");
                 }
             }
-            entityArr.Dispose();
+            // entityArr.Dispose();
         }
     }
 }

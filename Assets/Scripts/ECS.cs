@@ -7,6 +7,8 @@ using Unity.Mathematics;
 using Unity.Physics;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 
 namespace T {
     public class ECS {
@@ -48,8 +50,8 @@ namespace T {
                             typeof(Translation),
                             typeof(RenderMesh),
                             typeof(RenderBounds),
-                            typeof(LocalToWorld),
-                            typeof(PhysicsCollider)
+                            typeof(LocalToWorld)
+                        // typeof(PhysicsCollider)
                         );
                 case EArchetype.Rotatable:
                     return
@@ -58,8 +60,8 @@ namespace T {
                             typeof(Rotation),
                             typeof(RenderMesh),
                             typeof(RenderBounds),
-                            typeof(LocalToWorld),
-                            typeof(PhysicsCollider)
+                            typeof(LocalToWorld)
+                        // typeof(PhysicsCollider)
                         );
                 case EArchetype.Interactable:
                     return
@@ -97,10 +99,48 @@ namespace T {
             {
                 tt = 0.1f
             });
-            // _entityMgr.AddComponentData(entity, new PhysicsCollider
-            // {
 
-            // });
+            // NativeArray<float3> vertexBuffer = mesh.GetNativeVertexBufferPtr(0);
+            Vector3[] vertexArr = mesh.vertices;
+            float3[] float3Arr = new float3[mesh.vertices.Length];
+            for (int i = 0; i < vertexArr.Length; i++) {
+                float3Arr[i] = vertexArr[i];
+            }
+            NativeArray<float3> vertexBuffer = new NativeArray<float3>(vertexArr.Length, Allocator.Temp);
+            vertexBuffer.CopyFrom(float3Arr);
+
+            int[] triangleArr = mesh.triangles;
+            int3[] int3Arr = new int3[mesh.triangles.Length];
+            for (int i = 0; i < triangleArr.Length; i++) {
+                int3Arr[i] = triangleArr[i];
+            }
+            NativeArray<int3> triangleBuffer = new NativeArray<int3>(triangleArr.Length, Allocator.Temp);
+            triangleBuffer.CopyFrom(int3Arr);
+
+            BlobAssetReference<Unity.Physics.Collider> collider1 = Unity.Physics.MeshCollider.Create(
+                vertexBuffer,
+                triangleBuffer,
+                CollisionFilter.Default
+            );
+
+            BlobAssetReference<Unity.Physics.Collider> collider2 = Unity.Physics.PolygonCollider.CreateQuad(
+                new float3(-1.0f, 0.0f, 1.0f),
+                new float3(1.0f, 0.0f, 1.0f),
+                new float3(1.0f, 0.0f, -1.0f),
+                new float3(-1.0f, 0.0f, -1.0f),
+                CollisionFilter.Default
+            );
+
+            vertexBuffer.Dispose();
+            triangleBuffer.Dispose();
+
+            _entityMgr.AddComponentData(entity, new PhysicsCollider
+            {
+                Value = collider1
+            });
+
+            
+
             _entityMgr.SetComponentData(entity, new Translation
             {
                 Value = new float3(0.0f, 1000.0f, 0.0f)
@@ -109,7 +149,7 @@ namespace T {
             // {
             //     Value = new float4(0.0f, 0.0f, 0.0f, 0.0f)
             // });
-            
+
 
             _entityDict.Add(eEntity, entity);
         }

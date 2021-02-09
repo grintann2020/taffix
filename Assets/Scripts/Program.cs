@@ -1,8 +1,12 @@
 ﻿using System;
 using UnityEngine;
+using Unity.Entities;
 
 namespace T {
     public class Program : MonoBehaviour {
+        [SerializeField] private GameObject _hexPrefab;
+        private Entity _hexEntityPrefab;
+        
         public DataSetSO DataSet = null;
         public ESize size;
         private Camera _cam;
@@ -24,10 +28,16 @@ namespace T {
 
         public void Init() {
             _cam = Camera.main;
+
             DataSet.Init();
             
 
             // Debug.Log(colorSchemes[0].colorDictionary[EColor.Red].levels[0].linear);
+
+            // var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
+
+            // _hexEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(_hexPrefab, settings);
+
 
             _ecs.Init();
             _ecs.Create(
@@ -41,19 +51,62 @@ namespace T {
 
             _ctrl.Init(_cam, _ecs);
 
-            int[,] testArr = new int[9, 8] {
-                {3, 0, 3, 0, 3, 0, 3, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 1},
-                {3, 0, 1, 0, 3, 1, 0, 0},
-                {0, 0, 0, 0, 0, 2, 0, 1},
-                {3, 0, 1, 2, 3, 1, 3, 2},
-                {0, 0, 0, 0, 0, 0, 2, 0},
-                {0, 0, 2, 0, 0, 0, 0, 1},
-                {0, 0, 2, 0, 0, 0, 0, 1}
+            int[,] testArr = new int[11, 9] {
+                {3, 0, 3, 0, 3, 0, 3, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 0},
+                {3, 0, 1, 0, 3, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 2, 0, 1, 0},
+                {3, 0, 1, 2, 3, 1, 3, 2, 0},
+                {0, 0, 0, 0, 0, 0, 2, 0, 0},
+                {0, 0, 2, 0, 0, 0, 0, 1, 0},
+                {0, 0, 2, 0, 0, 0, 0, 1, 0},
+                {3, 0, 3, 0, 3, 0, 3, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}
             };
 
-            int[,] testArr1 = new int[40, 20] {
+            int[,] testAr100 = new int[10, 10] {
+                {3, 0, 3, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                {3, 0, 1, 0, 3, 1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 2, 0, 1, 0, 0},
+                {3, 0, 1, 2, 3, 1, 3, 2, 0, 0},
+                {0, 0, 0, 0, 0, 0, 2, 0, 0, 0},
+                {0, 0, 2, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 2, 0, 0, 0, 0, 1, 0, 0},
+                {3, 0, 3, 0, 3, 0, 3, 0, 0, 0}
+            };
+
+            int[,] testArr25_4 = new int[25, 4] {
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
+            };
+
+            int[,] testArr40_20 = new int[40, 20] {
                 {3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 0, 0, 2, 3, 0, 3, 0, 3, 0, 0},
                 {0, 0, 2, 1, 3, 0, 1, 1, 3, 0, 2, 0, 1, 1, 0, 0, 2, 1, 3, 0},
                 {0, 0, 1, 0, 3, 0, 3, 1, 0, 0, 0, 0, 2, 0, 2, 1, 0, 3, 0, 0},
@@ -104,12 +157,13 @@ namespace T {
                 {0, 0, 0, 0, 0},
             };
 
-            _space.Construct(testArr, size);
+            _space.Construct(testArr40_20, size);
             Excute();
         }
 
         public void Excute() {
             _space.Instantiate();
+            // _space.Instantiate2(_hexEntityPrefab);
         }
     }
 }
