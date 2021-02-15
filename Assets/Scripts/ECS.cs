@@ -133,10 +133,8 @@ namespace T {
 
             CylinderGeometry cylinderGeometry = new CylinderGeometry();
             cylinderGeometry.Center = new float3(0.0f, 0.0f, 0.0f);
-            // quaternion quat = new quaternion();
-            // quat.RotateX(-90);
-
-            cylinderGeometry.Orientation = quaternion.RotateX(-90);
+            // cylinderGeometry.Orientation = new quaternion(); but quaternion(0.0f, 0.0f, 0.0f, 0.0f) is not vaild;
+            cylinderGeometry.Orientation = quaternion.Euler(-1.5708f, 0, 1.5708f); // 1.5708 radian = 90 degree
             cylinderGeometry.Height = 0.1f;
             cylinderGeometry.Radius = 1.0f;
             cylinderGeometry.BevelRadius = 0.0f;
@@ -147,14 +145,10 @@ namespace T {
                 CollisionFilter.Default
             );
 
-            
-
             _entityMgr.AddComponentData(entity, new PhysicsCollider
             {
-                Value = collider1
+                Value = collider3
             });
-
-            
 
             _entityMgr.SetComponentData(entity, new Translation
             {

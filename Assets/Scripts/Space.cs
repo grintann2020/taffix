@@ -96,15 +96,12 @@ namespace T {
         }
         public void Instantiate2(Entity hex) {
             NativeArray<Entity> entityArr = new NativeArray<Entity>(HexArr.Length, Allocator.TempJob);
-
             for (int row = 0; row < HexArr.GetLength(0); row++) {
                 for (int col = 0; col < HexArr.GetLength(1); col++) {
                     if (HexArr[row, col] == null) {
                         continue;
                     }
                     int indexOfGrid = (row * HexArr.GetLength(1)) + col;
-                    // Debug.Log(indexOfGrid);
-
                     entityArr[indexOfGrid] = _ecs.EntityMgr.Instantiate(hex);
                     _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new Translation
                     {
@@ -117,12 +114,8 @@ namespace T {
                     // _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new MyOwnColor
                     // {
                     //     Value = new float4(0.0f, row * 0.2f, col * 0.1f, col * 0.001f)
-
                     // });
 
-                    // _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new PhysicsCollider
-                    // {
-                    // });
                     // _ecs.EntityMgr.SetComponentData(entityArr[indexOfGrid], new MaterialColor
                     // {
                     //     Value = new float4(0.0f, row * 0.2f, col * 0.1f, 0.5f)
