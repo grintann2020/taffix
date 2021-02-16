@@ -10,6 +10,7 @@ namespace T {
         public DataSetSO DataSet = null;
         public ESize size;
         private Camera _cam;
+        private Interact _interact = new Interact();
         private Control _ctrl = new Control();
         private Space _space = new Space();
         private ECS _ecs = new ECS();

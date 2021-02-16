@@ -11,8 +11,16 @@ namespace T {
         private EntityManager _entityMgr;
         private BuildPhysicsWorld _buildPhysicsWorld;
         private CollisionWorld _collisionWorld;
-        // private byte RAYCAST_DISTANCE = 255;
-        private int RAYCAST_DISTANCE = 1000;
+        private Vector2 _pressPosition;
+        private Vector2 _releasePosition;
+        private float _pressTime;
+        private float _pressDuration;
+        private float _releaseTime;
+        private Entity _pressEntity = Entity.Null;
+
+        private byte RAYCAST_DISTANCE = 255;
+        // private int RAYCAST_DISTANCE = 1000;
+
 
         public void Init(Camera cam, ECS ecs) {
             _cam = cam;
@@ -22,23 +30,43 @@ namespace T {
             _buildPhysicsWorld = _ecs.World.GetExistingSystem<Unity.Physics.Systems.BuildPhysicsWorld>();
         }
 
-        public void Bind() {
-
-        }
-
         public void InvokeUpdate() {
+            // if (Input.touchCount == 0) {
+            //     return;
+            // }
+
+            // Touch touch = Input.GetTouch(0);
+
+            // if (touch.phase == TouchPhase.Began) {
+            //     Debug.Log(touch.position);
+            // }
+
             if (Input.GetMouseButtonDown(0)) {
-                
-                _collisionWorld = _buildPhysicsWorld.PhysicsWorld.CollisionWorld;
                 // Debug.Log("GetMouseButtonDown --> " + Input.mousePosition);
-                var screenPointToRay = _cam.ScreenPointToRay(Input.mousePosition);
-                Entity eee = Raycast(screenPointToRay.origin, screenPointToRay.GetPoint(RAYCAST_DISTANCE));
-                Debug.Log(eee);
+                _collisionWorld = _buildPhysicsWorld.PhysicsWorld.CollisionWorld;
+                UnityEngine.Ray screenPointToRay = _cam.ScreenPointToRay(Input.mousePosition);
+                _pressEntity = Raycast(screenPointToRay.origin, screenPointToRay.GetPoint(RAYCAST_DISTANCE));
+                if (_pressEntity != Entity.Null) {
+                    _pressTime = Time.time;
+                    _pressPosition = Input.mousePosition;
+                    // Debug.Log(_pressTime + " -- " + Time.realtimeSinceStartup);
+                    // Debug.Log(_pressEntity);
+                    Debug.Log(_pressPosition);
+                }
+            }
+            if (Input.GetMouseButton(0)) {
+                if (_pressEntity != Entity.Null) {
+                    // Debug.Log(Time.time);
+
+                }
+            }
+            if (Input.GetMouseButtonUp(0)) {
+                _releaseTime = Time.time;
+                _pressEntity = Entity.Null;
             }
         }
 
         public Entity Raycast(float3 RayFrom, float3 RayTo) {
-
             // Debug.Log("RayFrom -> " + RayFrom +" ----> RayTo -> "+ RayTo);
             RaycastInput input = new RaycastInput()
             {
@@ -53,14 +81,11 @@ namespace T {
                 // }
             };
             Unity.Physics.RaycastHit hit = new Unity.Physics.RaycastHit();
-            // Debug.Log("_collisionWorld -- "+ _collisionWorld);
-            bool haveHit = _collisionWorld.CastRay(input, out hit);
-            
-            if (haveHit) {
-                // see hit.Position
-                // see hit.SurfaceNormal
-                Entity entity = _buildPhysicsWorld.PhysicsWorld.Bodies[hit.RigidBodyIndex].Entity;
-                return entity;
+            bool isHit = _collisionWorld.CastRay(input, out hit);
+            if (isHit) {
+                // Debug.Log(hit.Position);
+                // Debug.Log(hit.SurfaceNormal);
+                return _buildPhysicsWorld.PhysicsWorld.Bodies[hit.RigidBodyIndex].Entity;
             }
             return Entity.Null;
         }
